@@ -37,6 +37,7 @@ body {
     pointer-events: none;
 }
 
+/* ==================== 01. FIXED NAVBAR CENTER SYSTEM ==================== */
 header {
     display: flex;
     justify-content: space-between;
@@ -52,22 +53,81 @@ header {
     border-bottom: 1px solid rgba(255, 255, 255, 0.04);
 }
 
-.brand-logo { font-size: 20px; font-weight: 700; color: var(--text-primary); font-family: 'Fira Code', monospace; }
-.brand-logo span { color: var(--neon-cyan); }
-.nav-links a { color: var(--text-gray); text-decoration: none; margin-left: 22px; font-size: 14px; font-weight: 500; transition: 0.3s; }
-.nav-links a:hover, .nav-links a.active { color: var(--neon-cyan); text-shadow: 0 0 8px rgba(0, 242, 254, 0.4); }
-
-.hero-section {
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 120px 6% 60px 6%;
-    position: relative;
-    z-index: 1;
+.brand-logo { 
+    font-size: 20px; 
+    font-weight: 700; 
+    color: var(--text-primary); 
+    font-family: 'Fira Code', monospace; 
 }
 
-.hero-left { max-width: 50%; }
+.brand-logo span { color: var(--neon-cyan); }
+
+/* Links Container Centering Logic */
+.nav-links {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 30px; 
+    margin: 0 auto; /* Ya mule purn text screen chya center la shift hoto */
+    list-style: none;
+    padding: 0;
+}
+
+.nav-links a { 
+    color: var(--text-gray); 
+    text-decoration: none; 
+    font-size: 14px; 
+    font-weight: 500; 
+    transition: 0.3s; 
+    position: relative; 
+}
+
+.nav-links a:hover, .nav-links a.active { 
+    color: var(--neon-cyan); 
+    text-shadow: 0 0 8px rgba(0, 242, 254, 0.4); 
+}
+
+.nav-links a::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 0%;
+    height: 2px;
+    background: var(--neon-cyan);
+    transition: 0.4s;
+}
+
+.nav-links a:hover::after, .nav-links a.active::after {
+    width: 100%;
+}
+
+/* ==================== 02. HERO SECTION SIDE-BY-SIDE GRID LOCK ==================== */
+.hero-section {
+    min-height: 100vh;
+    display: flex !important;
+    flex-direction: row !important; /* Elements standard side-by-side flow linear thin rahtil */
+    align-items: center !important;
+    justify-content: space-between !important;
+    padding: 120px 6% 60px 6% !important;
+    position: relative !important;
+    background: #020612 !important;
+    z-index: 1 !important;
+    gap: 30px !important;
+}
+
+/* Left side content panel (Text dynamic container) */
+.hero-left { 
+    flex: 1.2 !important; 
+    max-width: 55% !important;
+    text-align: left !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
 .hello-tag { color: var(--neon-cyan); font-family: 'Fira Code', monospace; font-size: 14px; margin-bottom: 10px; }
 .main-name { font-size: 52px; font-weight: 700; line-height: 1.15; margin-bottom: 12px; }
 .main-name span { color: var(--neon-cyan); }
@@ -81,8 +141,30 @@ header {
 .highlight.purple { color: var(--neon-purple); }
 .highlight.orange { color: var(--neon-orange); }
 
-.hero-cta-group { display: flex; gap: 12px; margin-bottom: 30px; flex-wrap: wrap; }
-.btn { padding: 10px 22px; border-radius: 25px; font-size: 13px; font-weight: 600; text-decoration: none; display: inline-flex; align-items: center; gap: 6px; transition: 0.3s ease; }
+.hero-cta-group {
+    display: flex !important;
+    flex-direction: row !important;
+    flex-wrap: nowrap !important; /* Buttons na line break karu denar nahi */
+    gap: 8px !important;         
+    margin-bottom: 30px !important;
+    align-items: center !important;
+    justify-content: flex-start !important;
+    width: 100% !important;
+}
+
+.hero-cta-group .btn {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    white-space: nowrap !important;
+    width: auto !important;
+    padding: 8px 14px !important;  
+    font-size: 12px !important;    
+    border-radius: 25px;
+    text-decoration: none;
+    transition: 0.3s ease;
+}
+
 .download-btn { background: var(--neon-cyan); color: #030816; box-shadow: 0 4px 12px rgba(0, 242, 254, 0.25); }
 .download-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 15px rgba(0, 242, 254, 0.4); }
 .view-btn, .connect-btn { background: transparent; color: #ffffff; border: 1px solid rgba(255, 255, 255, 0.12); }
@@ -92,35 +174,48 @@ header {
 .social-icons-row a { width: 36px; height: 36px; border-radius: 50%; background: var(--bg-card); border: 1px solid var(--border-card); display: flex; align-items: center; justify-content: center; color: var(--text-gray); transition: 0.3s; font-size: 13px; }
 .social-icons-row a:hover { color: var(--neon-cyan); border-color: var(--neon-cyan); transform: translateY(-2px); }
 
-/* --- SEPARATED ORBIT SYSTEM (FIXED KEYFRAME OVERLAPPING) --- */
+/* Right side content panel (Photo Orbit Canvas Box) */
 .hero-right {
-    width: 48%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    flex: 0.8 !important;
+    width: 40% !important;
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    margin: 0 !important;
+    padding: 0 !important;
 }
 
+/* ==================== 03. PHOTO RIGID STRUCTURAL LAYOUT LOCK ==================== */
 .image-avatar-frame {
-    position: relative;
-    width: 320px;
-    height: 320px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    position: relative !important;
+    width: 340px !important;
+    height: 340px !important;
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
 }
 
 .photo-holder {
-    width: 220px;
-    height: 220px;
-    border-radius: 50%;
-    overflow: hidden;
-    border: 4px solid rgba(255, 255, 255, 0.1);
-    position: relative;
-    z-index: 5;
-    box-shadow: 0 0 30px rgba(0, 242, 254, 0.15);
+    position: absolute !important;
+    top: 50% !important;
+    left: 50% !important;
+    transform: translate(-50%, -50%) !important;
+    width: 76% !important;  /* Black frame mesh border chya exact aat path standard matching lock */
+    height: 76% !important;
+    border-radius: 50% !important;
+    overflow: hidden !important;
+    border: 4px solid rgba(255, 255, 255, 0.1) !important;
+    z-index: 5 !important;
+    box-shadow: 0 0 30px rgba(0, 242, 254, 0.15) !important;
 }
 
-.photo-holder img { width: 100%; height: 100%; object-fit: cover; }
+.photo-holder img { 
+    width: 100% !important; 
+    height: 100% !important; 
+    object-fit: cover !important; 
+    display: block !important;
+    border-radius: 50% !important;
+}
 
 .circle-glow-ring { position: absolute; border-radius: 50%; top: 25px; left: 25px; right: 25px; bottom: 25px; border: 2px dashed rgba(0, 242, 254, 0.2); animation: ringRotateClockwise 35s linear infinite; z-index: 1; }
 .ring-2 { top: 15px; left: 15px; right: 15px; bottom: 15px; border: 1px dotted rgba(155, 81, 224, 0.25); animation: ringRotateCounter 45s linear infinite; }
@@ -128,7 +223,7 @@ header {
 @keyframes ringRotateClockwise { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
 @keyframes ringRotateCounter { from { transform: rotate(360deg); } to { transform: rotate(0deg); } }
 
-/* Base class for floating tags */
+/* Floating animation items stack setup */
 .orbit-item {
     position: absolute;
     background: rgba(3, 8, 22, 0.92);
@@ -141,15 +236,12 @@ header {
     display: flex;
     align-items: center;
     gap: 6px;
-    z-index: 10;
+    z-index: 10 !important;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.6);
     white-space: nowrap;
 }
 .orbit-item i { font-size: 13px; }
 
-/* PERFECT UNIQUE MATRICES FOR EACH TAG 
-   Ata ya keyframes mule sagle skill tags alag-alag angular positions houn continuous circular matrix madhye phirtil.
-*/
 .tag-java { animation: rotateJava 28s linear infinite; border-left: 3px solid #f89820; }
 .tag-springboot { animation: rotateSpringBoot 28s linear infinite; border-left: 3px solid #6db33f; }
 .tag-angular { animation: rotateAngular 28s linear infinite; border-left: 3px solid #dd0031; }
@@ -182,7 +274,7 @@ header {
     100% { transform: rotate(660deg) translate(150px) rotate(-660deg); }
 }
 
-/* --- SKILLS & PROJECTS --- */
+/* ==================== 04. SKILLS & PROJECTS SECTIONS ==================== */
 .skills-section, .projects-section { padding: 60px 6%; position: relative; z-index: 2; }
 .section-title { font-size: 32px; font-weight: 700; margin-bottom: 40px; text-align: center; }
 .section-title span { color: var(--neon-cyan); }
@@ -204,157 +296,7 @@ header {
 .project-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 15px; }
 .project-tags span { background: rgba(0, 242, 254, 0.08); border: 1px solid rgba(0, 242, 254, 0.2); color: var(--neon-cyan); padding: 3px 10px; border-radius: 20px; font-size: 11px; font-family: 'Fira Code', monospace; }
 
-/* --- ULTRA SMOOTH MOUSE INTERACTIVE TRAIL --- */
-#cursor-particle-container { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; pointer-events: none; z-index: 9999; }
-/* 1. Cursor Color variable add kara */
-.cursor-particle { 
-    position: absolute; 
-    /* var(--particle-glow) use kara jyamule JS मधून color set होईल */
-    background: radial-gradient(circle, var(--particle-glow) 0%, rgba(255,255,255,0.2) 50%, rgba(3, 8, 22, 0) 100%); 
-    border-radius: 50%; 
-    pointer-events: none; 
-    transform: translate(-50%, -50%); 
-    /* Glow effect */
-    box-shadow: 0 0 15px var(--particle-glow), 0 0 30px var(--particle-glow); 
-    animation: fadeAndMove 0.7s cubic-bezier(0.08, 0.8, 0.2, 1) forwards; 
-}
-
-/* 2. Navbar Hover Effect (Horizontal Line) */
-.nav-links a { 
-    color: var(--text-gray); 
-    text-decoration: none; 
-    margin-left: 22px; 
-    font-size: 14px; 
-    font-weight: 500; 
-    transition: 0.3s; 
-    position: relative; /* Line sathi position relative */
-}
-
-/* Hover kelyavar horizontal line disel */
-.nav-links a::after {
-    content: '';
-    position: absolute;
-    bottom: -5px;
-    left: 0;
-    width: 0%;
-    height: 2px;
-    background: var(--neon-cyan);
-    transition: 0.4s;
-}
-
-.nav-links a:hover::after, .nav-links a.active::after {
-    width: 100%;
-}
-@keyframes fadeAndMove { 
-    0% { opacity: 1; transform: translate(-50%, -50%) scale(1); } 
-    100% { opacity: 0; transform: translate(-50%, -50%) scale(0.1) translateY(10px); } 
-}
-
-@media (max-width: 992px) {
-    .hero-section { flex-direction: column-reverse; text-align: center; padding-top: 140px; gap: 50px; }
-    .hero-left { max-width: 100%; }
-    .hero-cta-group, .social-icons-row { justify-content: center; }
-    .image-avatar-frame { width: 280px; height: 280px; }
-    .orbit-item { animation: none; position: relative; transform: none; display: inline-flex; margin: 4px; }
-}
-/* --- HERO BUTTONS ALIGNMENT FIX --- */
-.hero-cta-group {
-    display: flex !important;
-    flex-direction: row !important;
-    flex-wrap: nowrap !important; /* बटन्सना बळजबरी एकाच लाईनमध्ये ठेवेल */
-    gap: 8px !important;         /* बटन्समधील स्पेस थोडी कमी केली */
-    margin-bottom: 30px !important;
-    align-items: center !important;
-    justify-content: flex-start !important;
-    width: 100% !important;
-}
-
-.hero-cta-group .btn {
-    display: inline-flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    white-space: nowrap !important;
-    width: auto !important;
-    padding: 8px 14px !important;  /* पॅडिंग कमी केल्यामुळे बटन्स एका लाईनमध्ये बसतील */
-    font-size: 12px !important;    /* फॉन्ट साईझ हलकीशी बारीक केली */
-}
-
-/* जेव्हा स्क्रीन ९९२पेक्षा लहान होईल (मोबाईल/टॅबलेट), तेव्हा बटन्स सेंटरला येतील */
-@media (max-width: 992px) {
-    .hero-cta-group {
-        flex-wrap: wrap !important; /* मोबाईलवर बटन्स खाली-वर चालू शकतात */
-        justify-content: center !important;
-        gap: 12px !important;
-    }
-}
-/* --- FUTURISTIC PRELOADER STYLES --- */
-#preloader {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    background-color: #030816; /* तुझा कोर बॅकग्राउंड रंग */
-    z-index: 99999; /* हा सर्वात वर राहिला पाहिजे */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    transition: opacity 0.6s ease, visibility 0.6s ease;
-}
-
-.loader-content {
-    text-align: center;
-    width: 300px;
-}
-
-.loader-logo {
-    font-size: 28px;
-    font-weight: 700;
-    color: #ffffff;
-    font-family: 'Fira Code', monospace;
-    margin-bottom: 25px;
-    letter-spacing: 1px;
-}
-.loader-logo span {
-    color: var(--neon-cyan);
-    text-shadow: 0 0 10px rgba(0, 242, 254, 0.5);
-}
-
-/* प्रोग्रेस बारची आउटर लाईन */
-.progress-bar-container {
-    width: 100%;
-    height: 4px;
-    background: rgba(255, 255, 255, 0.05);
-    border-radius: 10px;
-    overflow: hidden;
-    margin-bottom: 15px;
-    box-shadow: inset 0 1px 3px rgba(0,0,0,0.5);
-}
-
-/* प्रत्यक्षात भरणारी निऑन लाईन */
-.progress-bar {
-    width: 0%;
-    height: 100%;
-    background: linear-gradient(90deg, var(--neon-purple), var(--neon-cyan));
-    box-shadow: 0 0 12px var(--neon-cyan);
-    transition: width 0.1s linear;
-}
-
-/* खालील स्टेटस टेक्स्ट */
-.loader-status {
-    font-family: 'Fira Code', monospace;
-    font-size: 13px;
-    color: var(--text-gray);
-    min-height: 20px;
-}
-
-/* प्रीलोडर संपल्यावर मुख्य वेबसाईट वर येतानाचा इफेक्ट */
-.preloader-hidden {
-    opacity: 0;
-    visibility: hidden;
-    pointer-events: none;
-}
-/* ==================== ADVANCED ABOUT & EDUCATION STYLES ==================== */
+/* ==================== 05. ADVANCED ABOUT SYSTEM ==================== */
 .about-section {
     padding: 100px 6% 60px 6%;
     position: relative;
@@ -400,7 +342,6 @@ header {
     opacity: 0.8;
 }
 
-/* Grid Layout */
 .about-grid {
     display: grid;
     grid-template-columns: 1fr 1.6fr;
@@ -431,7 +372,6 @@ header {
 .card-header-icon { font-size: 20px; color: var(--neon-cyan); }
 .about-card h3 { font-size: 20px; font-weight: 600; color: #ffffff; }
 
-/* Personal Info Items */
 .info-list { display: flex; flex-direction: column; gap: 20px; }
 .info-item { display: flex; align-items: center; gap: 15px; }
 .info-item i {
@@ -448,18 +388,8 @@ header {
 }
 .info-item span { font-size: 10px; font-family: 'Fira Code', monospace; color: var(--text-gray); display: block; letter-spacing: 1px; }
 .info-item p { font-size: 14px; font-weight: 500; color: #ffffff; margin-top: 2px; }
+.status-badge { color: var(--neon-cyan) !important; background: rgba(0, 242, 254, 0.06); padding: 2px 10px; border-radius: 20px; font-size: 12px !important; display: inline-block; border: 1px solid rgba(0, 242, 254, 0.15); }
 
-.status-badge {
-    color: var(--neon-cyan) !important;
-    background: rgba(0, 242, 254, 0.06);
-    padding: 2px 10px;
-    border-radius: 20px;
-    font-size: 12px !important;
-    display: inline-block;
-    border: 1px solid rgba(0, 242, 254, 0.15);
-}
-
-/* Professional Summary Card */
 .summary-text { font-size: 14.5px; color: var(--text-gray); line-height: 1.7; margin-bottom: 18px; text-align: justify; }
 .text-cyan { color: var(--neon-cyan); font-weight: 600; }
 .text-purple { color: var(--neon-purple); font-weight: 600; }
@@ -476,132 +406,69 @@ header {
 .career-objective-box h4 i { color: var(--neon-purple); margin-right: 6px; }
 .career-objective-box p { font-size: 13.5px; color: var(--text-gray); line-height: 1.6; margin: 0; }
 
-/* Education Layout */
-.sub-section-title {
-    font-size: 22px;
-    font-weight: 600;
-    margin: 40px 0 25px 0;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
+.sub-section-title { font-size: 22px; font-weight: 600; margin: 40px 0 25px 0; display: flex; align-items: center; gap: 10px; }
 .sub-section-title i { color: var(--neon-cyan); }
 
-.education-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 20px;
-    margin-bottom: 60px;
-}
-
-.edu-card {
-    background: rgba(255, 255, 255, 0.015);
-    border: 1px solid rgba(255, 255, 255, 0.04);
-    border-radius: 12px;
-    padding: 22px;
-    display: flex;
-    align-items: flex-start;
-    gap: 18px;
-    transition: 0.3s ease;
-}
+.education-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 60px; }
+.edu-card { background: rgba(255, 255, 255, 0.015); border: 1px solid rgba(255, 255, 255, 0.04); border-radius: 12px; padding: 22px; display: flex; align-items: flex-start; gap: 18px; transition: 0.3s ease; }
 .edu-card:hover { border-color: var(--neon-purple); transform: translateY(-2px); }
-
-.edu-icon-wrapper {
-    width: 44px;
-    height: 44px;
-    border-radius: 50%;
-    background: rgba(155, 81, 224, 0.06);
-    border: 1px solid rgba(155, 81, 224, 0.15);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: var(--neon-purple);
-    font-size: 16px;
-    flex-shrink: 0;
-}
-
+.edu-icon-wrapper { width: 44px; height: 44px; border-radius: 50%; background: rgba(155, 81, 224, 0.06); border: 1px solid rgba(155, 81, 224, 0.15); display: flex; align-items: center; justify-content: center; color: var(--neon-purple); font-size: 16px; flex-shrink: 0; }
 .edu-duration { font-size: 11px; font-family: 'Fira Code', monospace; color: var(--neon-cyan); background: rgba(0, 242, 254, 0.05); padding: 2px 8px; border-radius: 4px; display: inline-block; margin-bottom: 8px; }
 .edu-details h4 { font-size: 16px; font-weight: 600; color: #ffffff; margin-bottom: 4px; }
 .edu-stream { font-size: 13.5px; color: var(--text-gray); margin-bottom: 2px; }
 .edu-board { font-size: 12px; color: var(--text-gray); opacity: 0.6; }
 
-/* Dynamic Counters Box */
-.counters-row {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 20px;
-    background: rgba(255, 255, 255, 0.01);
-    border: 1px solid rgba(255, 255, 255, 0.03);
-    border-radius: 16px;
-    padding: 30px 20px;
-    text-align: center;
+/* ==================== 06. PREMIUM HORIZONTAL SKILLS PACK ==================== */
+.skill-category-block {
+    background: rgba(255, 255, 255, 0.01) !important;
+    border: 1px solid rgba(255, 255, 255, 0.04) !important;
+    border-radius: 16px !important;
+    padding: 25px !important;
+    margin-bottom: 35px !important;
+    width: 100% !important;
+    display: block !important;
 }
 
-/* ==================== VIDEO DETTO VERTICAL SKILLS LAYOUT ==================== */
-.skills-list-vertical {
-    display: flex;
-    flex-direction: column;
-    gap: 15px; /* कार्ड्समधील उभे अंतर */
-    margin-top: 15px;
-    width: 100%;
+.skills-box-grid, .skills-grid, .skills-list-vertical {
+    display: flex !important;
+    flex-direction: row !important; /* Cards line flow left to right side */
+    flex-wrap: nowrap !important;
+    gap: 15px !important;
+    width: 100% !important;
+    overflow-x: auto !important; /* Scroll bar logic safely added */
+    padding-bottom: 10px !important;
 }
 
-.skill-icon-card-full {
-    background: rgba(255, 255, 255, 0.02);
-    border: 1px solid rgba(255, 255, 255, 0.04);
-    border-radius: 12px;
-    padding: 30px 20px; /* उभ्या आकारात मोठे दिसण्यासाठी जास्त पॅडिंग */
-    width: 100%; /* पूर्ण स्क्रीन रुंदी घेईल */
-    display: flex;
-    flex-direction: column;
-    align-items: center; /* सर्व काही आडवे सेंटर करेल */
-    justify-content: center; /* सर्व काही उभे सेंटर करेल */
-    text-align: center;
-    transition: all 0.3s ease;
+.skills-box-grid::-webkit-scrollbar { height: 4px; }
+.skills-box-grid::-webkit-scrollbar-thumb { background: rgba(0, 242, 254, 0.2); border-radius: 10px; }
+
+.skill-icon-card, .skill-icon-card-full {
+    flex: 1 1 0% !important;
+    min-width: 140px !important;
+    background: rgba(255, 255, 255, 0.02) !important;
+    border: 1px solid rgba(255, 255, 255, 0.04) !important;
+    border-radius: 14px !important;
+    padding: 25px 15px !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    text-align: center !important;
+    transition: all 0.3s ease !important;
 }
 
-.skill-icon-card-full:hover {
-    border-color: rgba(255, 255, 255, 0.1);
-    background: rgba(255, 255, 255, 0.03);
-    transform: translateY(-2px);
+.skill-icon-card:hover, .skill-icon-card-full:hover {
+    border-color: rgba(0, 242, 254, 0.3) !important;
+    background: rgba(255, 255, 255, 0.04) !important;
+    transform: translateY(-4px) !important;
+    box-shadow: 0 10px 20px rgba(0, 242, 254, 0.05) !important;
 }
 
-/* व्हिडिओमधील कॅटेगरी हेडर्स (Frontend, Backend) चे स्टाइलिंग */
-.category-title {
-    font-size: 20px;
-    font-weight: 600;
-    color: #ffffff;
-    margin: 30px 0 15px 0;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
+.icon-wrapper { font-size: 40px !important; margin-bottom: 12px !important; }
+.skill-name { font-size: 14px !important; font-weight: 500 !important; color: #ffffff !important; margin-bottom: 6px !important; white-space: nowrap !important; }
+.per-text { font-family: 'Fira Code', monospace !important; font-size: 12px !important; color: var(--text-gray) !important; }
 
-/* आयकॉन्सचे आकार आणि कलर्स */
-.icon-wrapper {
-    font-size: 45px; /* व्हिडिओप्रमाणे मोठे आयकॉन्स */
-    margin-bottom: 12px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.skill-name {
-    font-size: 15px;
-    font-weight: 500;
-    color: #ffffff;
-    margin-bottom: 8px;
-    letter-spacing: 0.5px;
-}
-
-.per-text {
-    font-family: 'Fira Code', monospace;
-    font-size: 13px;
-    color: var(--text-gray);
-    opacity: 0.8;
-}
-
-/* व्हिडिओप्रमाणे ओरिजिनल कलर्स */
+/* Skill icons dynamic coloration */
 .icon-wrapper.html5 { color: #e34c26; }
 .icon-wrapper.css3 { color: #264de4; }
 .icon-wrapper.js { color: #f7df1e; }
@@ -620,205 +487,11 @@ header {
 .icon-wrapper.gradle { color: #02303a; }
 .icon-wrapper.jira { color: #0052cc; }
 .icon-wrapper.selenium { color: #00b400; }
-/* ==================== AJIT RATHOD HORIZONTAL SKILLS FIX ==================== */
 
-/* प्रत्येक मुख्य कॅटेगरीचा ब्लॉक (उदा. Frontend किंवा Backend) */
-.skill-category-block {
-    background: rgba(255, 255, 255, 0.01) !important;
-    border: 1px solid rgba(255, 255, 255, 0.04) !important;
-    border-radius: 16px !important;
-    padding: 25px !important;
-    margin-bottom: 35px !important;
-    width: 100% !important;
-    display: block !important;
-}
-
-/* व्हिडिओमध्ये दिसणारे कॅटेगरीचे नाव (Frontend / Backend) */
-.category-title {
-    font-size: 20px !important;
-    font-weight: 600 !important;
-    color: #ffffff !important;
-    margin-bottom: 25px !important;
-    display: flex !important;
-    align-items: center !important;
-    gap: 10px !important;
-}
-
-/* हा मुख्य बदल आहे: कार्ड्सना एका आडव्या रांगेत (Horizontal Row) आणण्यासाठी */
-.skills-box-grid, 
-.skills-grid, 
-.skills-list-vertical {
-    display: flex !important;
-    flex-direction: row !important; /* बटन्स किंवा कार्ड्स आडवे एका रांगेत येतील */
-    flex-wrap: nowrap !important;   /* बळजबरी एकाच लाईनमध्ये ठेवेल, खाली सरकणार नाही */
-    gap: 15px !important;           /* दोन कार्ड्समधील आडवे अंतर */
-    width: 100% !important;
-    overflow-x: auto !important;    /* जर स्क्रीन लहान झाली तर स्क्रोल होईल, लेआउट तुटणार नाही */
-    padding-bottom: 10px !important;
-}
-
-/* स्क्रोलबार लपवण्यासाठी किंवा सुंदर बनवण्यासाठी */
-.skills-box-grid::-webkit-scrollbar {
-    height: 4px;
-}
-.skills-box-grid::-webkit-scrollbar-thumb {
-    background: rgba(0, 242, 254, 0.2);
-    border-radius: 10px;
-}
-
-/* प्रत्येक वैयक्तिक स्किल कार्ड (उदा. HTML 5 चा डब्बा) */
-.skill-icon-card, 
-.skill-icon-card-full {
-    flex: 1 1 0% !important;        /* सर्व कार्ड्सना समान रुंदी देईल */
-    min-width: 140px !important;    /* कार्डची किमान रुंदी जेणेकरून टेक्स्ट जास्त दाबलं जाणार नाही */
-    background: rgba(255, 255, 255, 0.02) !important;
-    border: 1px solid rgba(255, 255, 255, 0.04) !important;
-    border-radius: 14px !important;
-    padding: 25px 15px !important;
-    display: flex !important;
-    flex-direction: column !important;
-    align-items: center !important;
-    justify-content: center !important;
-    text-align: center !important;
-    transition: all 0.3s ease !important;
-}
-
-/* माऊस नेल्यावरचा निऑन ग्लो इफेक्ट */
-.skill-icon-card:hover, 
-.skill-icon-card-full:hover {
-    border-color: rgba(0, 242, 254, 0.3) !important;
-    background: rgba(255, 255, 255, 0.04) !important;
-    transform: translateY(-4px) !important;
-    box-shadow: 0 10px 20px rgba(0, 242, 254, 0.05) !important;
-}
-
-/* आयकॉन्सचे साईझ */
-.icon-wrapper {
-    font-size: 40px !important;
-    margin-bottom: 12px !important;
-}
-
-.skill-name {
-    font-size: 14px !important;
-    font-weight: 500 !important;
-    color: #ffffff !important;
-    margin-bottom: 6px !important;
-    white-space: nowrap !important; /* नाव दोन लाईनमध्ये तुटणार नाही */
-}
-
-.per-text {
-    font-family: 'Fira Code', monospace !important;
-    font-size: 12px !important;
-    color: var(--text-gray) !important;
-}
-
-/* मोबाईल स्क्रीनसाठी (जेव्हा स्क्रीन खूप लहान असेल) */
-@media (max-width: 768px) {
-    .skills-box-grid, .skills-grid {
-        flex-wrap: wrap !important; /* मोबाईलवर एकाखाली एक येणे सोयीस्कर पडेल */
-        flex-direction: row !important;
-    }
-    .skill-icon-card, .skill-icon-card-full {
-        flex: 1 1 calc(50% - 10px) !important; /* मोबाईलवर एका लाईनमध्ये २ दिसतील */
-    }
-}
-/* ==================== SCREEN RECORDING DETTO 3-COLUMN PROJECTS GRID ==================== */
+/* ==================== 07. ADVANCED PROJECTS MATRIX ==================== */
 .advanced-projects-matrix {
     display: grid !important;
-    /* १ लाईनमध्ये ३ कार्ड्स बसवण्यासाठी */
-    grid-template-columns: repeat(3, 1fr) !important; 
-    gap: 25px !important;
-    max-width: 1200px !important;
-    margin: 0 auto !important;
-    width: 100% !important;
-}
-
-.modern-project-card {
-    background: rgba(255, 255, 255, 0.01) !important;
-    border: 1px solid rgba(255, 255, 255, 0.04) !important;
-    border-radius: 16px !important;
-    overflow: hidden !important;
-    display: flex !important;
-    flex-direction: column !important;
-    height: 100% !important;
-    transition: all 0.4s ease !important;
-}
-
-.modern-project-card:hover {
-    border-color: var(--neon-cyan) !important;
-    transform: translateY(-6px) !important;
-    box-shadow: 0 15px 30px rgba(0, 242, 254, 0.05) !important;
-}
-
-/* टॅब्लेट स्क्रीनसाठी (एका ओळीत २ कार्ड्स) */
-@media (max-width: 992px) {
-    .advanced-projects-matrix {
-        grid-template-columns: repeat(2, 1fr) !important;
-    }
-}
-
-/* मोबाईल स्क्रीनसाठी (एका ओळीत १ कार्ड) */
-@media (max-width: 600px) {
-    .advanced-projects-matrix {
-        grid-template-columns: 1fr !important;
-    }
-}
-/* ==================== PROJECTS IMAGE & LANGUAGE BOX MATRIX ==================== */
-
-/* इमेजचा डब्बा */
-.proj-img-container {
-    width: 100% !important;
-    height: 190px !important;
-    overflow: hidden !important;
-    position: relative !important;
-    background: #050e26 !important;
-}
-
-/* प्रत्यक्षात असणारी इमेज */
-.proj-main-img {
-    width: 100% !important;
-    height: 100% !important;
-    object-fit: cover !important; /* इमेज ताणली जाणार नाही, परफेक्ट फिट बसेल */
-    transition: transform 0.5s ease !important;
-}
-
-/* माऊस नेल्यावर इमेज हलकीशी झूम होईल (Premium Effect) */
-.modern-project-card:hover .proj-main-img {
-    transform: scale(1.06) !important;
-}
-
-/* लँग्वेज बॉक्सचे कंटेनर */
-.proj-mini-badge-row {
-    display: flex !important;
-    flex-wrap: wrap !important;
-    gap: 8px !important;
-    margin-bottom: 20px !important;
-}
-
-/* वैयक्तिक लँग्वेजचा निऑन बॉक्स */
-.lang-box {
-    font-size: 11px !important;
-    font-family: 'Fira Code', monospace !important;
-    padding: 3px 10px !important;
-    border-radius: 6px !important;
-    font-weight: 500 !important;
-    background: rgba(255, 255, 255, 0.02) !important;
-    border: 1px solid rgba(255, 255, 255, 0.08) !important;
-    color: #ffffff !important;
-}
-
-/* वेगवेगळ्या लँग्वेजला व्हिडिओसारखे स्वतंत्र फिकट कलर्स */
-.lang-box.html { border-color: rgba(227, 76, 38, 0.3) !important; color: #e34c26 !important; background: rgba(227, 76, 38, 0.03) !important; }
-.lang-box.css { border-color: rgba(38, 77, 228, 0.3) !important; color: #264de4 !important; background: rgba(38, 77, 228, 0.03) !important; }
-.lang-box.js { border-color: rgba(247, 223, 30, 0.3) !important; color: #f7df1e !important; background: rgba(247, 223, 30, 0.03) !important; }
-.lang-box.java { border-color: rgba(248, 152, 32, 0.3) !important; color: #f89820 !important; background: rgba(248, 152, 32, 0.03) !important; }
-.lang-box.springboot { border-color: rgba(109, 179, 63, 0.3) !important; color: #6db33f !important; background: rgba(109, 179, 63, 0.03) !important; }
-.lang-box.mysql { border-color: rgba(0, 117, 143, 0.3) !important; color: #00758f !important; background: rgba(0, 117, 143, 0.03) !important; }
-.lang-box.javafx { border-color: rgba(0, 168, 204, 0.3) !important; color: #00a8cc !important; background: rgba(0, 168, 204, 0.03) !important; }
-/* ==================== SCREEN RECORDING DETTO 3-COLUMN STRUCTURE ==================== */
-.advanced-projects-matrix {
-    display: grid !important;
-    grid-template-columns: repeat(3, 1fr) !important; /* एका ओळीत ३ कार्ड्स */
+    grid-template-columns: repeat(3, 1fr) !important; /* 3 Column flow configuration */
     gap: 25px !important;
     max-width: 1200px !important;
     margin: 0 auto !important;
@@ -842,62 +515,14 @@ header {
     box-shadow: 0 12px 25px rgba(0, 242, 254, 0.06) !important;
 }
 
-.proj-img-container {
-    width: 100% !important;
-    height: 180px !important;
-    overflow: hidden !important;
-    background: #030816 !important;
-}
-
-.proj-main-img {
-    width: 100% !important;
-    height: 100% !important;
-    object-fit: cover !important;
-    transition: transform 0.4s ease !important;
-}
-
-.modern-project-card:hover .proj-main-img {
-    transform: scale(1.04) !important;
-}
-
-.proj-body-content {
-    padding: 20px !important;
-    display: flex !important;
-    flex-direction: column !important;
-    flex-grow: 1 !important;
-}
-
-.proj-body-content h3 {
-    font-size: 18px !important;
-    font-weight: 600 !important;
-    color: #ffffff !important;
-    margin-bottom: 10px !important;
-}
-
-.proj-body-content p {
-    font-size: 13px !important;
-    color: var(--text-gray) !important;
-    line-height: 1.5 !important;
-    margin-bottom: 15px !important;
-    flex-grow: 1 !important;
-}
-
-.proj-mini-badge-row {
-    display: flex !important;
-    flex-wrap: wrap !important;
-    gap: 6px !important;
-    margin-bottom: 20px !important;
-}
-
-/* लँग्वेज टॅग्जचे व्हिडिओसारखे बॉक्सेस */
-.lang-box {
-    font-size: 11px !important;
-    font-family: 'Fira Code', monospace !important;
-    padding: 2px 8px !important;
-    border-radius: 4px !important;
-    background: rgba(255, 255, 255, 0.02) !important;
-    border: 1px solid rgba(255, 255, 255, 0.08) !important;
-}
+.proj-img-container { width: 100% !important; height: 180px !important; overflow: hidden !important; background: #030816 !important; }
+.proj-main-img { width: 100% !important; height: 100% !important; object-fit: cover !important; transition: transform 0.4s ease !important; }
+.modern-project-card:hover .proj-main-img { transform: scale(1.04) !important; }
+.proj-body-content { padding: 20px !important; display: flex !important; flex-direction: column !important; flex-grow: 1 !important; }
+.proj-body-content h3 { font-size: 18px !important; font-weight: 600 !important; color: #ffffff !important; margin-bottom: 10px !important; }
+.proj-body-content p { font-size: 13px !important; color: var(--text-gray) !important; line-height: 1.5 !important; margin-bottom: 15px !important; flex-grow: 1 !important; }
+.proj-mini-badge-row { display: flex !important; flex-wrap: wrap !important; gap: 6px !important; margin-bottom: 20px !important; }
+.lang-box { font-size: 11px !important; font-family: 'Fira Code', monospace !important; padding: 2px 8px !important; border-radius: 4px; background: rgba(255, 255, 255, 0.02) !important; border: 1px solid rgba(255, 255, 255, 0.08) !important; }
 
 .lang-box.html { border-color: rgba(227, 76, 38, 0.25) !important; color: #e34c26 !important; }
 .lang-box.css { border-color: rgba(38, 77, 228, 0.25) !important; color: #264de4 !important; }
@@ -906,193 +531,27 @@ header {
 .lang-box.java { border-color: rgba(248, 152, 32, 0.25) !important; color: #f89820 !important; }
 .lang-box.springboot { border-color: rgba(109, 179, 63, 0.25) !important; color: #6db33f !important; }
 .lang-box.mysql { border-color: rgba(0, 117, 143, 0.25) !important; color: #00758f !important; }
+.lang-box.ai { border-color: rgba(255, 159, 67, 0.3) !important; color: var(--neon-orange) !important; }
 
-.proj-action-links {
-    display: flex !important;
-    gap: 10px !important;
-}
-
-.proj-btn {
-    flex: 1 !important;
-    padding: 8px 0 !important;
-    font-size: 12px !important;
-    font-weight: 600 !important;
-    text-decoration: none !important;
-    text-align: center !important;
-    border-radius: 6px !important;
-    display: inline-flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    gap: 5px !important;
-}
-
+.proj-action-links { display: flex !important; gap: 10px !important; }
+.proj-btn { flex: 1 !important; padding: 8px 0 !important; font-size: 12px !important; font-weight: 600 !important; text-decoration: none !important; text-align: center !important; border-radius: 6px !important; display: inline-flex !important; align-items: center !important; justify-content: center !important; gap: 5px !important; }
 .code-link { background: transparent !important; color: #ffffff !important; border: 1px solid rgba(255, 255, 255, 0.08) !important; }
 .code-link:hover { border-color: #ffffff !important; background: rgba(255, 255, 255, 0.02) !important; }
 .demo-link { background: rgba(0, 242, 254, 0.05) !important; color: var(--neon-cyan) !important; border: 1px solid rgba(0, 242, 254, 0.15) !important; }
 .demo-link:hover { background: var(--neon-cyan) !important; color: #030816 !important; }
+.modern-project-card.core-project { border: 1px solid rgba(0, 242, 254, 0.15) !important; }
+.core-badge { background: rgba(155, 81, 224, 0.85) !important; color: #ffffff !important; border: 1px solid var(--neon-purple) !important; box-shadow: 0 0 10px rgba(155, 81, 224, 0.4); }
 
-/* रिस्पॉन्सिव्ह मीडिया */
-@media (max-width: 992px) { .advanced-projects-matrix { grid-template-columns: repeat(2, 1fr) !important; } }
-@media (max-width: 600px) { .advanced-projects-matrix { grid-template-columns: 1fr !important; } }
-.proj-img-container {
-    width: 100% !important;
-    height: 180px !important;
-    overflow: hidden !important;
-    background: #030816 !important;
-}
-
-.proj-main-img {
-    width: 100% !important;
-    height: 100% !important;
-    object-fit: cover !important; /* इमेज खेचली जाणार नाही, परफेक्ट क्रॉप होऊन बसेल */
-    transition: transform 0.4s ease !important;
-}
-
-.modern-project-card:hover .proj-main-img {
-    transform: scale(1.05) !important; /* माऊस नेल्यावर हलकासा झूम इफेक्ट */
-}
-/* Core Projects ला खास लुक देण्यासाठी */
-.modern-project-card.core-project {
-    border: 1px solid rgba(0, 242, 254, 0.15) !important;
-}
-.core-badge {
-    background: rgba(155, 81, 224, 0.85) !important;
-    color: #ffffff !important;
-    border: 1px solid var(--neon-purple) !important;
-    box-shadow: 0 0 10px rgba(155, 81, 224, 0.4);
-}
-.lang-box.ai { border-color: rgba(255, 159, 67, 0.3) !important; color: var(--neon-orange) !important; }
-/* ==================== SCREEN RECORDING DETTO SERVICES STYLES ==================== */
-.services-section {
-    padding: 100px 6% 60px 6%;
-    position: relative;
-    z-index: 2;
-}
-
-.services-glow {
-    position: absolute;
-    bottom: 10%;
-    right: -5%;
-    width: 400px;
-    height: 400px;
-    background: radial-gradient(circle, rgba(0, 242, 254, 0.05) 0%, rgba(3, 8, 22, 0) 70%);
-    pointer-events: none;
-    z-index: -1;
-}
-
-/* ३-कॉलम ग्रिड मॅट्रिक्स */
-.services-grid-matrix {
-    display: grid !important;
-    grid-template-columns: repeat(3, 1fr) !important; /* एका लाईनमध्ये ३ कार्ड्स */
-    gap: 25px !important;
-    max-width: 1200px !important;
-    margin: 0 auto !important;
-    width: 100% !important;
-}
-
-.modern-service-card {
-    background: rgba(255, 255, 255, 0.015) !important;
-    border: 1px solid rgba(255, 255, 255, 0.04) !important;
-    border-radius: 14px !important;
-    padding: 35px 25px !important;
-    display: flex !important;
-    flex-direction: column !important;
-    align-items: center !important;
-    text-align: center !important;
-    transition: all 0.4s ease !important;
-}
-
-.modern-service-card:hover {
-    border-color: rgba(0, 242, 254, 0.25) !important;
-    transform: translateY(-5px) !important;
-    background: rgba(255, 255, 255, 0.02) !important;
-    box-shadow: 0 15px 30px rgba(0, 242, 254, 0.04) !important;
-}
-
-/* आयकॉन बॉक्सचे स्टाइलिंग */
-.service-icon-box {
-    width: 60px;
-    height: 60px;
-    border-radius: 12px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 24px;
-    margin-bottom: 22px;
-    background: rgba(255, 255, 255, 0.02);
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    transition: all 0.3s ease;
-}
-
-.modern-service-card:hover .service-icon-box {
-    transform: scale(1.08);
-}
-
-/* निऑन ग्लो कलर्स */
-.service-icon-box.cyan-glow { color: var(--neon-cyan); border-color: rgba(0, 242, 254, 0.2); }
-.modern-service-card:hover .service-icon-box.cyan-glow { box-shadow: 0 0 15px rgba(0, 242, 254, 0.4); background: rgba(0, 242, 254, 0.05); }
-
-.service-icon-box.purple-glow { color: var(--neon-purple); border-color: rgba(155, 81, 224, 0.2); }
-.modern-service-card:hover .service-icon-box.purple-glow { box-shadow: 0 0 15px rgba(155, 81, 224, 0.4); background: rgba(155, 81, 224, 0.05); }
-
-.service-icon-box.orange-glow { color: var(--neon-orange); border-color: rgba(255, 159, 67, 0.2); }
-.modern-service-card:hover .service-icon-box.orange-glow { box-shadow: 0 0 15px rgba(255, 159, 67, 0.4); background: rgba(255, 159, 67, 0.05); }
-
-/* मजकूराचे स्टाइलिंग */
-.modern-service-card h3 {
-    font-size: 18px !important;
-    font-weight: 600 !important;
-    color: #ffffff !important;
-    margin-bottom: 12px !important;
-}
-
-.modern-service-card p {
-    font-size: 13.5px !important;
-    color: var(--text-gray) !important;
-    line-height: 1.6 !important;
-    margin: 0 !important;
-}
-
-/* रिस्पॉन्सिव्ह मीडिया क्वायरीज */
-@media (max-width: 992px) {
-    .services-grid-matrix { grid-template-columns: repeat(2, 1fr) !important; }
-}
-@media (max-width: 600px) {
-    .services-grid-matrix { grid-template-columns: 1fr !important; }
-}
-/* ==================== SCREEN RECORDING DETTO SERVICES STYLES (SIZE REDUCED) ==================== */
-.services-section {
-    padding: 80px 6% 50px 6%; /* पॅडिंग कमी केली */
-    position: relative;
-    z-index: 2;
-}
-
-.services-glow {
-    position: absolute;
-    bottom: 10%;
-    right: -5%;
-    width: 350px;
-    height: 350px;
-    background: radial-gradient(circle, rgba(0, 242, 254, 0.05) 0%, rgba(3, 8, 22, 0) 70%);
-    pointer-events: none;
-    z-index: -1;
-}
-
-/* ३-कॉलम ग्रिड मॅट्रिक्स */
-.services-grid-matrix {
-    display: grid !important;
-    grid-template-columns: repeat(3, 1fr) !important; 
-    gap: 20px !important; /* कार्ड्समधील स्पेस थोडी कमी केली */
-    max-width: 1140px !important;
-    margin: 0 auto !important;
-    width: 100% !important;
-}
+/* ==================== 08. COMPACT SERVICES SECTION ==================== */
+.services-section { padding: 80px 6% 50px 6%; position: relative; z-index: 2; }
+.services-glow { position: absolute; bottom: 10%; right: -5%; width: 350px; height: 350px; background: radial-gradient(circle, rgba(0, 242, 254, 0.05) 0%, rgba(3, 8, 22, 0) 70%); pointer-events: none; z-index: -1; }
+.services-grid-matrix { display: grid !important; grid-template-columns: repeat(3, 1fr) !important; gap: 20px !important; max-width: 1140px !important; margin: 0 auto !important; width: 100% !important; }
 
 .modern-service-card {
     background: rgba(255, 255, 255, 0.015) !important;
     border: 1px solid rgba(255, 255, 255, 0.04) !important;
     border-radius: 12px !important;
-    padding: 24px 18px !important; /* आतील स्पेस (Padding) ३५px वरून २४px केली */
+    padding: 24px 18px !important; 
     display: flex !important;
     flex-direction: column !important;
     align-items: center !important;
@@ -1100,130 +559,32 @@ header {
     transition: all 0.4s ease !important;
 }
 
-.modern-service-card:hover {
-    border-color: rgba(0, 242, 254, 0.25) !important;
-    transform: translateY(-4px) !important;
-    background: rgba(255, 255, 255, 0.02) !important;
-    box-shadow: 0 12px 25px rgba(0, 242, 254, 0.04) !important;
-}
+.modern-service-card:hover { border-color: rgba(0, 242, 254, 0.25) !important; transform: translateY(-4px) !important; background: rgba(255, 255, 255, 0.02) !important; box-shadow: 0 12px 25px rgba(0, 242, 254, 0.04) !important; }
+.service-icon-box { width: 52px; height: 52px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 20px; margin-bottom: 16px; background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(255, 255, 255, 0.08); transition: all 0.3s ease; }
+.modern-service-card:hover .service-icon-box { transform: scale(1.05); }
 
-/* आयकॉन बॉक्सचा साईझ थोडा लहान केला */
-.service-icon-box {
-    width: 52px;  /* ६०px वरून ५२px केलं */
-    height: 52px; /* ६०px वरून ५२px केलं */
-    border-radius: 10px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 20px; /* आयकॉन साईझ २४px वरून २०px केला */
-    margin-bottom: 16px; /* खालचा गॅप कमी केला */
-    background: rgba(255, 255, 255, 0.02);
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    transition: all 0.3s ease;
-}
-
-.modern-service-card:hover .service-icon-box {
-    transform: scale(1.05);
-}
-
-/* निऑन ग्लो कलर्स */
 .service-icon-box.cyan-glow { color: var(--neon-cyan); border-color: rgba(0, 242, 254, 0.2); }
 .modern-service-card:hover .service-icon-box.cyan-glow { box-shadow: 0 0 12px rgba(0, 242, 254, 0.35); background: rgba(0, 242, 254, 0.05); }
-
 .service-icon-box.purple-glow { color: var(--neon-purple); border-color: rgba(155, 81, 224, 0.2); }
 .modern-service-card:hover .service-icon-box.purple-glow { box-shadow: 0 0 12px rgba(155, 81, 224, 0.35); background: rgba(155, 81, 224, 0.05); }
-
 .service-icon-box.orange-glow { color: var(--neon-orange); border-color: rgba(255, 159, 67, 0.2); }
 .modern-service-card:hover .service-icon-box.orange-glow { box-shadow: 0 0 12px rgba(255, 159, 67, 0.35); background: rgba(255, 159, 67, 0.05); }
 
-/* हेडिंगचा फॉन्ट साईझ हलकासा लहान केला */
-.modern-service-card h3 {
-    font-size: 16px !important; /* १८px वरून १६px केला */
-    font-weight: 600 !important;
-    color: #ffffff !important;
-    margin-bottom: 10px !important;
-    letter-spacing: 0.3px;
-}
+.modern-service-card h3 { font-size: 16px !important; font-weight: 600 !important; color: #ffffff !important; margin-bottom: 10px !important; letter-spacing: 0.3px; }
+.modern-service-card p { font-size: 12.5px !important; color: var(--text-gray) !important; line-height: 1.55 !important; margin: 0 !important; opacity: 0.9; }
 
-/* डिस्क्रिप्शनचा मजकूर आणि फॉन्ट साईझ ऑप्टिमाइझ केला */
-.modern-service-card p {
-    font-size: 12.5px !important; /* १३.५px वरून १२.५px केला */
-    color: var(--text-gray) !important;
-    line-height: 1.55 !important;
-    margin: 0 !important;
-    opacity: 0.9;
-}
+/* ==================== 09. COMPACT LINEAR TIMELINE ==================== */
+.timeline-section { padding: 70px 6% 40px 6% !important; position: relative; z-index: 2; background: #020614 !important; }
+.timeline-container { position: relative; max-width: 850px !important; margin: 30px auto 0 auto !important; width: 100%; }
+.timeline-line { position: absolute; width: 2px; background: linear-gradient(to bottom, var(--neon-cyan), var(--neon-purple), var(--neon-orange), rgba(255,255,255,0.05)); top: 0; bottom: 0; left: 50%; transform: translateX(-50%); z-index: 1; }
+.timeline-item { display: flex; position: relative; margin-bottom: 25px !important; width: 100%; }
+.left-item { justify-content: flex-start; padding-right: 52% !important; }
+.right-item { justify-content: flex-end; padding-left: 52% !important; }
 
-/* रिस्पॉन्सिव्ह मीडिया क्वायरीज */
-@media (max-width: 992px) {
-    .services-grid-matrix { grid-template-columns: repeat(2, 1fr) !important; gap: 15px !important; }
-}
-@media (max-width: 600px) {
-    .services-grid-matrix { grid-template-columns: 1fr !important; }
-}
-/* ==================== VIDEO DETTO VERTICAL TIMELINE STYLES ==================== */
-.timeline-section {
-    padding: 100px 6% 60px 6%;
-    position: relative;
-    z-index: 2;
-}
-
-.timeline-glow {
-    position: absolute;
-    top: 30%;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 300px;
-    height: 500px;
-    background: radial-gradient(circle, rgba(155, 81, 224, 0.04) 0%, rgba(3, 8, 22, 0) 70%);
-    pointer-events: none;
-    z-index: -1;
-}
-
-.timeline-container {
-    position: relative;
-    max-width: 1000px;
-    margin: 40px auto 0 auto;
-    width: 100%;
-}
-
-/* मध्यभागी असणारी उभी लाईन */
-.timeline-line {
-    position: absolute;
-    width: 2px;
-    background: linear-gradient(to bottom, var(--neon-cyan), var(--neon-purple), var(--neon-orange), rgba(255,255,255,0.05));
-    top: 0;
-    bottom: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    z-index: 1;
-}
-
-/* टाईमलाईनचे वैयक्तिक रो (Row) */
-.timeline-item {
-    display: flex;
-    position: relative;
-    margin-bottom: 40px;
-    width: 100%;
-}
-
-/* डाव्या बाजूचे कार्ड */
-.left-item {
-    justify-content: flex-start;
-    padding-right: 50%;
-}
-
-/* उजव्या बाजूचे कार्ड */
-.right-item {
-    justify-content: flex-end;
-    padding-left: 50%;
-}
-
-/* मधील गोल निऑन डॉट्स */
 .timeline-icon-dot {
     position: absolute;
-    width: 40px;
-    height: 40px;
+    width: 34px !important; 
+    height: 34px !important; 
     border-radius: 50%;
     background: #030816;
     border: 2px solid rgba(255, 255, 255, 0.1);
@@ -1231,542 +592,104 @@ header {
     align-items: center;
     justify-content: center;
     left: 50%;
-    top: 20px;
+    top: 12px !important; 
     transform: translateX(-50%);
     z-index: 5;
-    font-size: 14px;
+    font-size: 12px !important; 
     transition: all 0.3s ease;
 }
-
-.timeline-icon-dot.cyan-dot { color: var(--neon-cyan); border-color: var(--neon-cyan); box-shadow: 0 0 10px rgba(0, 242, 254, 0.3); }
-.timeline-icon-dot.purple-dot { color: var(--neon-purple); border-color: var(--neon-purple); box-shadow: 0 0 10px rgba(155, 81, 224, 0.3); }
-.timeline-icon-dot.orange-dot { color: var(--neon-orange); border-color: var(--neon-orange); box-shadow: 0 0 10px rgba(255, 159, 67, 0.3); }
-
-/* टाईमलाईनचे प्रत्यक्ष कार्ड डिझाईन */
-.timeline-card {
-    background: rgba(255, 255, 255, 0.015);
-    border: 1px solid rgba(255, 255, 255, 0.04);
-    border-radius: 12px;
-    padding: 22px;
-    width: 90%;
-    position: relative;
-    transition: all 0.3s ease;
-}
-
-.left-item .timeline-card { margin-right: auto; }
-.right-item .timeline-card { margin-left: auto; }
-
-.timeline-item:hover .timeline-card {
-    border-color: rgba(0, 242, 254, 0.2);
-    background: rgba(255, 255, 255, 0.02);
-    transform: translateY(-2px);
-}
-
-/* ==================== COMPACT TIMELINE LAYOUT (SIZE LESS) ==================== */
-.timeline-section {
-    padding: 70px 6% 40px 6% !important; /* वरची-खालची पॅडिंग कमी केली */
-    position: relative;
-    z-index: 2;
-}
-
-.timeline-container {
-    position: relative;
-    max-width: 850px !important; /* एकूण रुंदी १००0px वरून ८५0px केली */
-    margin: 30px auto 0 auto !important;
-    width: 100%;
-}
-
-/* मध्यभागी असणारी उभी लाईन */
-.timeline-line {
-    position: absolute;
-    width: 2px;
-    background: linear-gradient(to bottom, var(--neon-cyan), var(--neon-purple), var(--neon-orange), rgba(255,255,255,0.05));
-    top: 0;
-    bottom: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    z-index: 1;
-}
-
-/* टाईमलाईनचे वैयक्तिक रो (Row) */
-.timeline-item {
-    display: flex;
-    position: relative;
-    margin-bottom: 25px !important; /* दोन कार्ड्समधील उभे अंतर ४0px वरून २५px केले */
-    width: 100%;
-}
-
-/* डाव्या बाजूचे कार्ड पोझिशन */
-.left-item {
-    justify-content: flex-start;
-    padding-right: 52% !important; /* गॅप व्यवस्थित मॅनेज करण्यासाठी */
-}
-
-/* उजव्या बाजूचे कार्ड पोझिशन */
-.right-item {
-    justify-content: flex-end;
-    padding-left: 52% !important;
-}
-
-/* मधील गोल निऑन डॉट्सचा साईझ कमी केला */
-.timeline-icon-dot {
-    position: absolute;
-    width: 34px !important;  /* ४0px वरून ३४px केला */
-    height: 34px !important; /* ४0px वरून ३४px केला */
-    border-radius: 50%;
-    background: #030816;
-    border: 2px solid rgba(255, 255, 255, 0.1);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    left: 50%;
-    top: 12px !important; /* डॉट थोडा वर सरकवला */
-    transform: translateX(-50%);
-    z-index: 5;
-    font-size: 12px !important; /* आयकॉन साईझ लहान केला */
-    transition: all 0.3s ease;
-}
-
 .timeline-icon-dot.cyan-dot { color: var(--neon-cyan); border-color: var(--neon-cyan); box-shadow: 0 0 8px rgba(0, 242, 254, 0.3); }
 .timeline-icon-dot.purple-dot { color: var(--neon-purple); border-color: var(--neon-purple); box-shadow: 0 0 8px rgba(155, 81, 224, 0.3); }
 .timeline-icon-dot.orange-dot { color: var(--neon-orange); border-color: var(--neon-orange); box-shadow: 0 0 8px rgba(255, 159, 67, 0.3); }
 
-/* कार्डचा मुख्य आकार लहान करणे */
-.timeline-card {
-    background: rgba(255, 255, 255, 0.015);
-    border: 1px solid rgba(255, 255, 255, 0.04);
-    border-radius: 10px !important; /* बॉर्डर्स शार्प आणि कॉम्पॅक्ट केले */
-    padding: 16px 20px !important; /* आतील स्पेस २२px वरून १६px केली */
-    width: 100% !important; /* कंटेनरनुसार रुंदी सेट होईल */
-    position: relative;
-    transition: all 0.3s ease;
-}
+.timeline-card { background: rgba(255, 255, 255, 0.015); border: 1px solid rgba(255, 255, 255, 0.04); border-radius: 10px !important; padding: 16px 20px !important; width: 100% !important; position: relative; transition: all 0.3s ease; }
+.time-badge { font-family: 'Fira Code', monospace; font-size: 10.5px !important; color: var(--neon-cyan); background: rgba(0, 242, 254, 0.05); padding: 1px 6px !important; border-radius: 4px; display: inline-block; margin-bottom: 6px !important; }
+.timeline-card h3 { font-size: 15px !important; font-weight: 600; color: #ffffff; margin-bottom: 2px !important; }
+.status-text, .inst-text { font-size: 11.5px !important; color: var(--neon-purple); font-weight: 500; margin-bottom: 6px !important; }
+.details-text { font-size: 12px !important; color: var(--text-gray); line-height: 1.5 !important; margin: 0; }
 
-/* कार्डच्या आतील फॉन्टचा साईझ आणि गॅप कमी केला */
-.time-badge {
-    font-family: 'Fira Code', monospace;
-    font-size: 10.5px !important;
-    color: var(--neon-cyan);
-    background: rgba(0, 242, 254, 0.05);
-    padding: 1px 6px !important;
-    border-radius: 4px;
-    display: inline-block;
-    margin-bottom: 6px !important;
-}
+/* ==================== 10. COMPACT CERTIFICATE LAYOUT ==================== */
+.experience-cert-section { padding: 60px 4% 40px 4% !important; background: #030816; }
+.cert-grid-matrix { display: grid !important; grid-template-columns: repeat(4, 1fr) !important; gap: 15px !important; max-width: 1200px !important; margin: 30px auto 0 auto !important; width: 100% !important; perspective: 1000px; }
+.modern-cert-card { background: #060d22 !important; border: 1px solid rgba(255, 255, 255, 0.03) !important; border-radius: 10px !important; padding: 12px !important; display: flex !important; flex-direction: column !important; transform-style: preserve-3d; transition: transform 0.1s ease, border-color 0.3s ease, box-shadow 0.3s ease !important; }
+.cert-top-icon { font-size: 16px !important; margin-bottom: 8px !important; }
+.cert-img-holder { width: 100% !important; height: 150px !important; border-radius: 5px !important; overflow: hidden !important; background: #ffffff !important; padding: 5px !important; border: 1px solid rgba(255, 255, 255, 0.05) !important; margin-bottom: 10px !important; display: flex !important; align-items: center !important; justify-content: center !important; }
+.cert-img { width: 100% !important; height: 100% !important; object-fit: contain !important; }
+.cert-body h3 { font-size: 13.5px !important; font-weight: 600 !important; color: #ffffff !important; margin-bottom: 2px !important; line-height: 1.3 !important; }
+.company-name { font-size: 11.5px !important; font-weight: 500 !important; margin-bottom: 1px !important; }
+.cert-duration { font-size: 10px !important; color: #8f9cae !important; margin-bottom: 12px !important; }
+.view-cert-btn { margin-top: auto !important; width: 100% !important; padding: 7px 0 !important; font-size: 11.5px !important; font-weight: 600 !important; border-radius: 5px !important; text-decoration: none; display: inline-flex; align-items: center; justify-content: center; gap: 8px; transition: 0.2s; }
+.view-cert-btn:hover { opacity: 0.9 !important; }
 
-.timeline-card h3 {
-    font-size: 15px !important; /* १७px वरून १५px केला */
-    font-weight: 600;
-    color: #ffffff;
-    margin-bottom: 2px !important;
-}
-
-.status-text, .inst-text {
-    font-size: 11.5px !important; /* १२px वरून ११.५px केला */
-    color: var(--neon-purple);
-    font-weight: 500;
-    margin-bottom: 6px !important;
-}
-
-.details-text {
-    font-size: 12px !important; /* १३px वरून १२px केला */
-    color: var(--text-gray);
-    line-height: 1.5 !important; /* मजकुरातील ओळींची उंची कमी केली */
-    margin: 0;
-}
-
-/* मोबाईल रिस्पॉन्सिव्हनेस फिक्स */
-@media (max-width: 768px) {
-    .timeline-line { left: 20px; }
-    .timeline-icon-dot { left: 20px; transform: none; top: 15px !important; }
-    .left-item, .right-item { padding-left: 45px !important; padding-right: 0 !important; justify-content: flex-start; }
-    .timeline-card { width: 100% !important; }
-}
-/* ==================== CERTIFICATE SIZE CRITICAL FIX ==================== */
-
-/* मुख्य ग्रिड कंटेनर - एका लाईनमध्ये ४ कार्ड्स ठेवण्यासाठी */
-.cert-grid-matrix {
-    display: grid !important;
-    grid-template-columns: repeat(4, 1fr) !important; 
-    gap: 15px !important; /* कार्ड्समधील अंतर कमी केले */
-    max-width: 1200px !important;
-    margin: 30px auto 0 auto !important;
-    width: 100% !important;
-}
-
-/* ==================== VIDEO DETTO 4-COLUMN MOVEMENT ENGINE ==================== */
-
-.experience-cert-section {
-    padding: 80px 4% 60px 4% !important;
-    position: relative;
-    background: #030816;
-}
-
-/* व्हिडिओ सारखा १ ओळीत ४ कार्ड्सचा सुटसुटीत मॅट्रिक्स */
-.cert-grid-matrix {
-    display: grid !important;
-    grid-template-columns: repeat(4, 1fr) !important; 
-    gap: 20px !important;
-    max-width: 1400px !important; /* रुंदी वाढवली जेणेकरून कार्ड्स नीट बसतील */
-    margin: 40px auto 0 auto !important;
-    width: 100% !important;
-    perspective: 1000px; /* ३D रोटेशनसाठी अनिवार्य */
-}
-
-/* मुख्य सर्टिफिकेट कार्ड */
-.modern-cert-card {
-    background: #060d22 !important;
-    border: 1px solid rgba(255, 255, 255, 0.03) !important;
-    border-radius: 12px !important;
-    padding: 18px !important;
-    display: flex !important;
-    flex-direction: column !important;
-    transform-style: preserve-3d;
-    transition: transform 0.1s ease, border-color 0.3s ease, box-shadow 0.3s ease !important;
-    box-shadow: 0 10px 20px rgba(0,0,0,0.3) !important;
-}
-
-/* टॉप डेटाबेस आयकॉन डब्बा स्टाइलिंग */
-.cert-top-icon {
-    font-size: 20px !important;
-    margin-bottom: 12px !important;
-    display: flex;
-    align-items: center;
-}
-
-/* पांढरी बॅकग्राउंड फ्रेम असणारा इमेज होल्डर */
-.cert-img-holder {
-    width: 100% !important;
-    height: 240px !important; /* व्हिडिओनुसार उभ्या आकारासाठी परफेक्ट हाईट */
-    border-radius: 6px !important;
-    overflow: hidden !important;
-    background: #ffffff !important; 
-    padding: 8px !important; 
-    border: 1px solid rgba(255, 255, 255, 0.05) !important;
-    margin-bottom: 14px !important;
-    display: flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-}
-
-.cert-img {
-    width: 100% !important;
-    height: 100% !important;
-    object-fit: contain !important;
-}
-
-.cert-body {
-    display: flex !important;
-    flex-direction: column !important;
-    flex-grow: 1 !important;
-}
-
-.cert-body h3 {
-    font-size: 16px !important;
-    font-weight: 600 !important;
-    color: #ffffff !important;
-    margin-bottom: 4px !important;
-}
-
-.company-name {
-    font-size: 13px !important;
-    font-weight: 500 !important;
-    margin-bottom: 2px !important;
-}
-
-.cert-duration {
-    font-size: 11px !important;
-    color: #8f9cae !important;
-    margin-bottom: 16px !important;
-}
-
-/* ==================== निऑन ग्लॉसी रंगांचा मारा (Theme Colors) ==================== */
-
-/* Theme 1: Cyan (#00f2fe) */
 .cert-cyan .cert-top-icon { color: #00f2fe !important; }
 .cert-cyan .company-name { color: #00f2fe !important; }
 .cert-cyan .view-cert-btn { background: #00f2fe !important; color: #030816 !important; }
 .cert-cyan:hover { border-color: #00f2fe !important; box-shadow: 0 15px 30px rgba(0, 242, 254, 0.15) !important; }
-
-/* Theme 2: Purple (#9b51e0) */
 .cert-purple .cert-top-icon { color: #9b51e0 !important; }
 .cert-purple .company-name { color: #9b51e0 !important; }
 .cert-purple .view-cert-btn { background: #9b51e0 !important; color: #ffffff !important; }
 .cert-purple:hover { border-color: #9b51e0 !important; box-shadow: 0 15px 30px rgba(155, 81, 224, 0.15) !important; }
-
-/* Theme 3: Blue (#2f80ed) */
 .cert-blue .cert-top-icon { color: #2f80ed !important; }
 .cert-blue .company-name { color: #2f80ed !important; }
 .cert-blue .view-cert-btn { background: #2f80ed !important; color: #ffffff !important; }
 .cert-blue:hover { border-color: #2f80ed !important; box-shadow: 0 15px 30px rgba(47, 128, 237, 0.15) !important; }
-
-/* Theme 4: Green (#27ae60) */
 .cert-green .cert-top-icon { color: #2ecc71 !important; }
 .cert-green .company-name { color: #2ecc71 !important; }
 .cert-green .view-cert-btn { background: #2ecc71 !important; color: #030816 !important; }
 .cert-green:hover { border-color: #2ecc71 !important; box-shadow: 0 15px 30px rgba(46, 204, 113, 0.15) !important; }
 
-/* व्ह्यू बटन कॉमन स्टाईल्स - थेट व्हिडिओसारखे सॉलिड बॅकग्राउंड */
-.view-cert-btn {
-    margin-top: auto !important;
-    width: 100% !important;
-    padding: 10px 0 !important;
-    font-size: 13px !important;
-    font-weight: 600 !important;
-    text-decoration: none !important;
-    text-align: center !important;
-    border-radius: 6px !important;
-    display: inline-flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    gap: 8px !important;
-    transition: opacity 0.2s ease !important;
-}
-
-.view-cert-btn:hover {
-    opacity: 0.9 !important;
-}
-
-/* रिस्पॉन्सिव्ह स्क्रीन डिझाईन */
-@media (max-width: 1200px) { .cert-grid-matrix { grid-template-columns: repeat(3, 1fr) !important; } }
-@media (max-width: 992px) { .cert-grid-matrix { grid-template-columns: repeat(2, 1fr) !important; } }
-@media (max-width: 600px) { .cert-grid-matrix { grid-template-columns: 1fr !important; } }
-/* ==================== CERTIFICATE FINAL SIZE REDUCTION FIX ==================== */
-
-.experience-cert-section {
-    padding: 60px 4% 40px 4% !important; /* सेक्शनची पॅडिंग कमी केली */
-    background: #030816;
-}
-
-.cert-grid-matrix {
-    display: grid !important;
-    grid-template-columns: repeat(4, 1fr) !important; 
-    gap: 15px !important; /* कार्ड्समधील गॅप कमी केला */
-    max-width: 1200px !important; /* मॅक्स विड्थ थोडी कमी केली जेणेकरून डब्बे लहान होतील */
-    margin: 30px auto 0 auto !important;
-    width: 100% !important;
-    perspective: 1000px;
-}
-
-/* मुख्य कार्ड - एकदम कॉम्पॅक्ट साईझ */
-.modern-cert-card {
-    background: #060d22 !important;
-    border: 1px solid rgba(255, 255, 255, 0.03) !important;
-    border-radius: 10px !important;
-    padding: 12px !important; /* आतील मोकळी जागा १८px वरून १२px केली */
-    display: flex !important;
-    flex-direction: column !important;
-    transform-style: preserve-3d;
-    transition: transform 0.1s ease, border-color 0.3s ease, box-shadow 0.3s ease !important;
-}
-
-/* डेटाबेस आयकॉन डब्बा */
-.cert-top-icon {
-    font-size: 16px !important; /* आयकॉन साईझ लहान केला */
-    margin-bottom: 8px !important;
-}
-
-/* इमेजचा डब्बा - उंची २४०px वरून थेट १५०px केली! */
-.cert-img-holder {
-    width: 100% !important;
-    height: 150px !important; /* यामुळे तुझे मोठे दिसणारे फोटो एकदम लहान आणि परफेक्ट होतील */
-    border-radius: 5px !important;
-    overflow: hidden !important;
-    background: #ffffff !important; 
-    padding: 5px !important; 
-    border: 1px solid rgba(255, 255, 255, 0.05) !important;
-    margin-bottom: 10px !important;
-    display: flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-}
-
-.cert-img {
-    width: 100% !important;
-    height: 100% !important;
-    object-fit: contain !important;
-}
-
-/* मजकुराची फॉन्ट साईझ अजून कमी केली */
-.cert-body h3 {
-    font-size: 13.5px !important; /* १५px वरून १३.५px केला */
-    font-weight: 600 !important;
-    color: #ffffff !important;
-    margin-bottom: 2px !important;
-    line-height: 1.3 !important;
-}
-
-.company-name {
-    font-size: 11.5px !important; /* १३px वरून ११.५px केला */
-    font-weight: 500 !important;
-    margin-bottom: 1px !important;
-}
-
-.cert-duration {
-    font-size: 10px !important; /* ११px वरून १०px केला */
-    color: #8f9cae !important;
-    margin-bottom: 12px !important;
-}
-
-/* व्ह्यू बटन एकदम सुटसुटीत आणि बारीक */
-.view-cert-btn {
-    margin-top: auto !important;
-    width: 100% !important;
-    padding: 7px 0 !important; /* बटन बारीक केले */
-    font-size: 11.5px !important; /* टेक्स्ट लहान केला */
-    font-weight: 600 !important;
-    border-radius: 5px !important;
-}
-
-/* टॅब्लेट आणि मोबाईल रिस्पॉन्सिव्ह */
-@media (max-width: 992px) { .cert-grid-matrix { grid-template-columns: repeat(2, 1fr) !important; } }
-@media (max-width: 600px) { 
-    .cert-grid-matrix { grid-template-columns: 1fr !important; } 
-    .cert-img-holder { height: 180px !important; } /* मोबाईलवर स्क्रीननुसार योग्य आकार */
-}
-/* ==================== VIDEO DETTO STATS & CONTACT ENGINE ==================== */
-
-/* Statistics Section */
+/* ==================== 11. COMPACT CONTACT MATRIX ==================== */
 .stats-section { padding: 60px 6% !important; background: #030816; }
-.stats-grid-matrix {
-    display: grid !important;
-    grid-template-columns: repeat(4, 1fr) !important;
-    gap: 20px !important;
-    max-width: 1200px !important;
-    margin: 30px auto 0 auto !important;
-}
-.modern-stats-card {
-    background: #060d22 !important;
-    border: 1px solid rgba(255, 255, 255, 0.03) !important;
-    border-radius: 12px !important;
-    padding: 30px 20px !important;
-    text-align: center !important;
-    transition: 0.3s ease !important;
-}
+.stats-grid-matrix { display: grid !important; grid-template-columns: repeat(4, 1fr) !important; gap: 20px !important; max-width: 1200px !important; margin: 30px auto 0 auto !important; }
+.modern-stats-card { background: #060d22 !important; border: 1px solid rgba(255, 255, 255, 0.03) !important; border-radius: 12px !important; padding: 30px 20px !important; text-align: center !important; transition: 0.3s ease !important; }
 .modern-stats-card:hover { border-color: rgba(0, 242, 254, 0.2) !important; transform: translateY(-3px); }
 .modern-stats-card h3 { font-size: 32px !important; color: #ffffff !important; font-weight: 700 !important; margin-bottom: 8px !important; }
 .modern-stats-card p { font-size: 13px !important; color: #8f9cae !important; margin: 0 !important; }
 
-/* ==================== COMPACT CONTACT LAYOUT (SIZE LESS) ==================== */
-.contact-section { 
-    padding: 60px 6% 40px 6% !important; /* वरचा आणि खालचा गॅप कमी केला */
-    background: #030816; 
-}
+.contact-section { padding: 60px 6% 40px 6% !important; background: #01040a !important; }
+.contact-dual-layout { display: flex !important; gap: 25px !important; max-width: 1050px !important; margin: 30px auto 0 auto !important; perspective: 1000px; align-items: stretch !important; }
+.contact-info-panel, .contact-form-panel { flex: 1 !important; background: #060d22 !important; border: 1px solid rgba(255, 255, 255, 0.03) !important; border-radius: 12px !important; padding: 24px !important; transform-style: preserve-3d; transition: transform 0.1s ease, border-color 0.3s ease, box-shadow 0.3s ease !important; box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2) !important; display: flex !important; flex-direction: column !important; }
+.contact-info-panel h3, .contact-form-panel h3 { font-size: 16px !important; color: #ffffff !important; margin-bottom: 20px !important; font-weight: 600 !important; }
 
-.contact-dual-layout {
-    display: flex !important;
-    gap: 25px !important; /* दोन्ही पॅनल्समधील अंतर ४०px वरून २५px केले */
-    max-width: 1050px !important; /* एकूण रुंदी १२००px वरून १०५०px केली (रुंदी कमी झाली) */
-    margin: 30px auto 0 auto !important;
-    perspective: 1000px;
-}
+.info-block-item { display: flex !important; align-items: center !important; gap: 12px !important; margin-bottom: 15px !important; }
+.info-icon-wrapper { width: 34px !important; height: 34px !important; border-radius: 6px !important; background: rgba(0, 242, 254, 0.04) !important; border: 1px solid rgba(0, 242, 254, 0.15) !important; color: #00f2fe !important; display: flex !important; align-items: center !important; justify-content: center !important; font-size: 13px !important; }
+.info-text-wrapper label { font-size: 9px !important; color: #8f9cae !important; display: block !important; margin-bottom: 1px !important; }
+.info-text-wrapper p, .info-text-wrapper a { font-size: 12px !important; color: #ffffff !important; margin: 0 !important; text-decoration: none; }
 
-.contact-info-panel, .contact-form-panel {
-    flex: 1 !important;
-    background: #060d22 !important;
-    border: 1px solid rgba(255, 255, 255, 0.03) !important;
-    border-radius: 12px !important; /* बॉर्डर्स अधिक कॉम्पॅक्ट केले */
-    padding: 20px 24px !important; /* आतील स्पेस (Padding) ३०px वरून २०px केली (उंची कमी झाली) */
-    transform-style: preserve-3d;
-    transition: transform 0.1s ease, border-color 0.3s ease, box-shadow 0.3s ease !important;
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2) !important;
-}
-
-.contact-info-panel h3, .contact-form-panel h3 { 
-    font-size: 17px !important; /* हेडिंग २०px वरून १७px केले */
-    color: #ffffff !important; 
-    margin-bottom: 18px !important; /* हेडिंगखालचा गॅप कमी केला */
-}
-
-/* डाव्या बाजूचे माहितीचे ब्लॉक्स (Compact Info Items) */
-.info-block-item { 
-    display: flex !important; 
-    align-items: center !important; 
-    gap: 12px !important; 
-    margin-bottom: 14px !important; /* ब्लॉक्समधील उभं अंतर कमी केलं */
-}
-
-.info-icon-wrapper {
-    width: 36px !important; /* आयकॉन बॉक्स ४४px वरून ३६px केला */
-    height: 36px !important; 
-    border-radius: 6px !important;
-    background: rgba(0, 242, 254, 0.04) !important; 
-    border: 1px solid rgba(0, 242, 254, 0.15) !important;
-    color: #00f2fe !important; 
-    display: flex !important; 
-    align-items: center !important; 
-    justify-content: center !important; 
-    font-size: 14px !important; /* आयकॉन थोडा लहान केला */
-}
-
-.info-text-wrapper label { 
-    font-size: 9.5px !important; 
-    color: #8f9cae !important; 
-    display: block !important; 
-    margin-bottom: 1px !important; 
-    letter-spacing: 0.5px; 
-}
-
-.info-text-wrapper p, .info-text-wrapper a { 
-    font-size: 12.5px !important; /* टेक्स्ट १३.५px वरून १२.५px केला */
-    color: #ffffff !important; 
-    margin: 0 !important; 
-}
-
-/* उजव्या बाजूचे इनपुट्स (Compact Form Inputs) */
-.form-input-group { 
-    margin-bottom: 12px !important; /* इनपुटमधील गॅप १८px वरून १२px केला */
-}
-
-.form-input-group label { 
-    font-size: 10.5px !important; 
-    color: #8f9cae !important; 
-    margin-bottom: 5px !important; 
-}
-
-.form-input-group input, .form-input-group textarea {
-    background: #0b142c !important; 
-    border: 1px solid rgba(255,255,255,0.06) !important;
-    border-radius: 6px !important; 
-    padding: 9px 12px !important; /* इनपुटच्या आतील पॅडिंग कमी केली (उंची कमी झाली) */
-    color: #ffffff !important; 
-    font-size: 12.5px !important; 
-}
-
-/* सबमिट बटन डिझाईन */
-.form-submit-btn {
-    width: 100% !important; 
-    padding: 10px 0 !important; /* बटनची उंची १२px वरून १०px केली */
-    font-size: 13px !important; 
-    font-weight: 600 !important;
-    border-radius: 6px !important;
-}
-
-/* रिस्पॉन्सिव्ह स्क्रीन मॅनेजमेंट */
-@media (max-width: 992px) {
-    .contact-dual-layout { flex-direction: column !important; gap: 20px !important; max-width: 100% !important; }
-}
-
-/* Form inputs right side */
-.form-input-group { margin-bottom: 18px !important; display: flex !important; flex-direction: column !important; }
-.form-input-group label { font-size: 11px !important; color: #8f9cae !important; margin-bottom: 8px !important; font-weight: 500 !important; }
-.form-input-group input, .form-input-group textarea {
-    background: #0b142c !important; border: 1px solid rgba(255,255,255,0.06) !important;
-    border-radius: 8px !important; padding: 12px !important; color: #ffffff !important; font-size: 13px !important; outline: none !important; transition: 0.3s ease !important;
-}
+.modern-contact-form { display: flex !important; flex-direction: column !important; height: 100% !important; }
+.form-input-group { margin-bottom: 10px !important; display: flex !important; flex-direction: column !important; }
+.form-input-group label { font-size: 10px !important; color: #8f9cae !important; margin-bottom: 4px !important; }
+.form-input-group input, .form-input-group textarea { background: #0b142c !important; border: 1px solid rgba(255,255,255,0.06) !important; border-radius: 6px !important; padding: 7px 10px !important; color: #ffffff !important; font-size: 11.5px !important; font-family: inherit !important; outline: none; }
 .form-input-group input:focus, .form-input-group textarea:focus { border-color: #00f2fe !important; background: #0e1a38 !important; }
+.form-input-group textarea { resize: none !important; height: 75px !important; }
 
-/* व्हिडिओ सारखे प्रिमियम ग्रॅडिएंट सबमिट बटन */
 .form-submit-btn {
-    width: 100% !important; padding: 12px 0 !important; border: none !important; border-radius: 8px !important;
+    width: 100% !important; padding: 9px 0 !important; border: none !important; border-radius: 6px !important;
     background: linear-gradient(135deg, #7952b3 0%, #00f2fe 100%) !important;
-    color: #ffffff !important; font-size: 14px !important; font-weight: 600 !important; cursor: pointer !important;
+    color: #ffffff !important; font-size: 12px !important; font-weight: 600 !important; cursor: pointer !important;
     display: inline-flex !important; align-items: center !important; justify-content: center !important; gap: 8px !important;
-    transition: 0.3s ease !important;
+    transition: 0.3s ease !important; margin-top: 5px !important;
 }
 .form-submit-btn:hover { opacity: 0.95 !important; box-shadow: 0 5px 15px rgba(0, 242, 254, 0.2) !important; }
 
-/* Modern Footer Styles */
+/* ==================== 12. DYNAMIC COUNTERS & DIVIDERS ==================== */
+.about-stats-container { display: grid !important; grid-template-columns: repeat(4, 1fr) !important; gap: 20px !important; max-width: 1100px !important; margin: 30px auto !important; width: 100% !important; perspective: 1000px; }
+.about-stat-box { background: #060d22 !important; border: 1px solid rgba(255, 255, 255, 0.03) !important; border-radius: 12px !important; padding: 24px 15px !important; text-align: center !important; transform-style: preserve-3d; transition: transform 0.1s ease, border-color 0.3s ease, box-shadow 0.3s ease !important; box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2) !important; }
+.about-stat-box:hover { border-color: rgba(0, 242, 254, 0.3) !important; box-shadow: 0 12px 30px rgba(0, 242, 254, 0.12) !important; }
+.stat-number { font-size: 28px !important; font-weight: 700 !important; color: #ffffff !important; margin-bottom: 6px !important; }
+.stat-label { font-size: 12.5px !important; color: #8f9cae !important; margin: 0 !important; font-weight: 400 !important; letter-spacing: 0.3px; }
+
+section { padding-top: 110px !important; padding-bottom: 110px !important; margin-bottom: 60px !important; position: relative !important; }
+section::after { content: "" !important; position: absolute !important; bottom: 0 !important; left: 10% !important; width: 80% !important; height: 1px !important; background: linear-gradient(to right, transparent, rgba(0, 242, 254, 0.15), rgba(155, 81, 224, 0.15), transparent) !important; }
+#contact::after { display: none !important; }
+#contact { margin-bottom: 0px !important; padding-bottom: 80px !important; }
+
+#about { background: linear-gradient(180deg, #020612 0%, #050f2b 50%, #020612 100%) !important; }
+#skills { background: #02050e !important; }
+#projects { background: linear-gradient(135deg, #030816 0%, #071233 100%) !important; }
+#services { background: radial-gradient(circle at 10% 20%, #030816 0%, #080a21 90%) !important; }
+
+/* ==================== 13. MODERN FOOTER SYSTEM ==================== */
 .modern-footer { background: #020612 !important; padding: 50px 6% 20px 6% !important; border-top: 1px solid rgba(255,255,255,0.02) !important; }
 .footer-top-matrix { display: flex !important; justify-content: space-between !important; gap: 40px !important; max-width: 1200px !important; margin: 0 auto !important; padding-bottom: 40px !important; }
 .footer-brand-box { flex: 2 !important; }
@@ -1783,595 +706,87 @@ header {
 .footer-bottom-bar p { font-size: 12px !important; color: #637381 !important; margin: 0 !important; }
 .footer-bottom-bar p span i { color: #ff4d4d !important; }
 
-/* Responsive Adaptability */
-@media (max-width: 992px) {
-    .stats-grid-matrix { grid-template-columns: repeat(2, 1fr) !important; }
-    .contact-dual-layout, .footer-top-matrix { flex-direction: column !important; gap: 25px !important; }
+/* ==================== 14. INTERACTIVE PARTICLES & PRELOADER ==================== */
+#cursor-particle-container { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; pointer-events: none; z-index: 9999; }
+.cursor-particle { 
+    position: absolute; 
+    background: radial-gradient(circle, var(--particle-glow) 0%, rgba(255,255,255,0.2) 50%, rgba(3, 8, 22, 0) 100%); 
+    border-radius: 50%; 
+    pointer-events: none; 
+    transform: translate(-50%, -50%); 
+    box-shadow: 0 0 15px var(--particle-glow), 0 0 30px var(--particle-glow); 
+    animation: fadeAndMove 0.7s cubic-bezier(0.08, 0.8, 0.2, 1) forwards; 
 }
-@media (max-width: 600px) {
-    .stats-grid-matrix { grid-template-columns: 1fr !important; }
+@keyframes fadeAndMove { 
+    0% { opacity: 1; transform: translate(-50%, -50%) scale(1); } 
+    100% { opacity: 0; transform: translate(-50%, -50%) scale(0.1) translateY(10px); } 
 }
-/* ==================== 08. CONTACT SECTION PERFECT EQUAL HEIGHT FIX ==================== */
-
-.contact-section { 
-    padding: 60px 6% 40px 6% !important; 
-    background: #030816; 
-}
-
-.contact-dual-layout {
-    display: flex !important;
-    gap: 25px !important; 
-    max-width: 1050px !important; 
-    margin: 30px auto 0 auto !important;
-    perspective: 1000px;
-    align-items: stretch !important; /* यामुळे दोन्ही बॉक्सेसची उंची १००% सारखीच (Equal) राहील */
-}
-
-.contact-info-panel, .contact-form-panel {
-    flex: 1 !important;
-    background: #060d22 !important;
-    border: 1px solid rgba(255, 255, 255, 0.03) !important;
-    border-radius: 12px !important; 
-    padding: 24px !important; /* पॅडिंग अजून परफेक्ट केली */
-    transform-style: preserve-3d;
-    transition: transform 0.1s ease, border-color 0.3s ease, box-shadow 0.3s ease !important;
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2) !important;
-    
-    display: flex !important;
-    flex-direction: column !important; /* आतील एलिमेंट्स मॅनेज करण्यासाठी */
-}
-
-/* दोन्ही पॅनल्सचे हेडिंग */
-.contact-info-panel h3, .contact-form-panel h3 { 
-    font-size: 16px !important; /* फॉन्ट साईझ अजून हलकासा लहान केला */
-    color: #ffffff !important; 
-    margin-bottom: 20px !important; 
-    font-weight: 600 !important;
-}
-
-/* डाव्या बाजूचे माहितीचे ब्लॉक्स गॅप फिक्स */
-.info-block-item { 
-    display: flex !important; 
-    align-items: center !important; 
-    gap: 12px !important; 
-    margin-bottom: 15px !important; /* परफेक्ट व्हिज्युअल गॅप */
-}
-
-.info-icon-wrapper {
-    width: 34px !important; 
-    height: 34px !important; 
-    border-radius: 6px !important;
-    background: rgba(0, 242, 254, 0.04) !important; 
-    border: 1px solid rgba(0, 242, 254, 0.15) !important;
-    color: #00f2fe !important; 
-    display: flex !important; 
-    align-items: center !important; 
-    justify-content: center !important; 
-    font-size: 13px !important; 
-}
-
-.info-text-wrapper label { 
-    font-size: 9px !important; 
-    color: #8f9cae !important; 
-    display: block !important; 
-    margin-bottom: 1px !important; 
-}
-
-.info-text-wrapper p, .info-text-wrapper a { 
-    font-size: 12px !important; /* फॉन्ट हलकासा लहान केला */
-    color: #ffffff !important; 
-    margin: 0 !important; 
-}
-
-/* ==================== इनपुट बॉक्सेस आणि फॉन्ट साईझ LESS (बारीक) करणे ==================== */
-
-.modern-contact-form {
-    display: flex !important;
-    flex-direction: column !important;
-    height: 100% !important; /* फॉर्म पूर्ण उंची कव्हर करेल */
-}
-
-.form-input-group { 
-    margin-bottom: 10px !important; /* इनपुटमधील गॅप अजून कमी केला */
-    display: flex !important;
-    flex-direction: column !important;
-}
-
-.form-input-group label { 
-    font-size: 10px !important; 
-    color: #8f9cae !important; 
-    margin-bottom: 4px !important; 
-}
-
-/* इनपुट फील्ड्स आणि टेक्स्टएरियाचा आकार आणि फॉन्ट लहान केला */
-.form-input-group input, .form-input-group textarea {
-    background: #0b142c !important; 
-    border: 1px solid rgba(255,255,255,0.06) !important;
-    border-radius: 6px !important; 
-    padding: 7px 10px !important; /* इनपुटच्या आतील पॅडिंग कमी केली (Height Less) */
-    color: #ffffff !important; 
-    font-size: 11.5px !important; /* फॉन्ट बारीक (Less) केला */
-    font-family: inherit !important;
-}
-
-/* मेसेज इनपुट (Textarea) ची स्वतःची उंची देखील नियंत्रणात ठेवली */
-.form-input-group textarea {
-    resize: none !important;
-    height: 75px !important; /* मेसेज बॉक्सची उंची कमी केली जेणेकरून डब्बा जास्त मोठा होणार नाही */
-}
-
-/* सबमिट बटन डिझाईन */
-.form-submit-btn {
-    width: 100% !important; 
-    padding: 9px 0 !important; 
-    font-size: 12px !important; 
-    font-weight: 600 !important;
-    border-radius: 6px !important;
-    margin-top: 5px !important; /* बटण आणि बॉक्समधील गॅप */
-}
-
-/* रिस्पॉन्सिव्ह स्क्रीन */
-@media (max-width: 992px) {
-    .contact-dual-layout { flex-direction: column !important; gap: 20px !important; }
-}
-/* ==================== 100% MOBILE RESPONSIVE ENGINE ==================== */
-
-@media (max-width: 768px) {
-    /* 1. कॉमन सेक्शन पॅडिंग मोबाईलसाठी कमी करणे */
-    section {
-        padding: 40px 4% 30px 4% !important;
-    }
-    
-    .section-main-title {
-        font-size: 26px !important; /* मोबाईलवर हेडिंगचा आकार योग्य केला */
-        margin-bottom: 5px !important;
-    }
-    
-    .section-subtitle {
-        font-size: 12px !important;
-        margin-bottom: 25px !important;
-    }
-
-    /* 2. प्रोजेक्ट्स विभाग (Projects Section) - १ कॉलम */
-    .advanced-projects-matrix {
-        grid-template-columns: 1fr !important; /* ३ कॉलम ऐवजी १ कॉलम */
-        gap: 20px !important;
-    }
-    
-    .modern-project-card {
-        max-width: 100% !important;
-    }
-    
-    .proj-img-container {
-        height: 180px !important; /* मोबाईलवर इमेजची उंची योग्य ठेवली */
-    }
-
-    /* 3. सर्व्हिसेस विभाग (Services Section) - १ कॉलम */
-    .services-grid-matrix {
-        grid-template-columns: 1fr !important; /* ३ कॉलम ऐवजी १ कॉलम */
-        gap: 15px !important;
-    }
-    
-    .modern-service-card {
-        padding: 20px 15px !important;
-    }
-
-    /* 4. टाईमलाईन विभाग (Timeline Section) - डावीकडे फिट */
-    .timeline-container {
-        margin-top: 20px !important;
-    }
-    
-    .timeline-line {
-        left: 15px !important; /* रेषा डावीकडे सरकवली */
-    }
-    
-    .timeline-icon-dot {
-        left: 15px !important; 
-        transform: translateX(-50%) !important;
-        top: 15px !important;
-        width: 30px !important;
-        height: 30px !important;
-        font-size: 11px !important;
-    }
-    
-    .left-item, .right-item {
-        padding-left: 40px !important; /* डावीकडून परफेक्ट स्पेस */
-        padding-right: 0 !important;
-        justify-content: flex-start !important;
-    }
-    
-    .timeline-card {
-        width: 100% !important;
-        padding: 14px !important;
-    }
-    
-    .timeline-card h3 {
-        font-size: 14px !important;
-    }
-
-    /* 5. सर्टिफिकेट्स विभाग (Certificates Section) - २ किंवा १ कॉलम */
-    .cert-grid-matrix {
-        grid-template-columns: repeat(2, 1fr) !important; /* मोबाईलवर एका लाईनमध्ये २ सर्टिफिकेट्स मस्त दिसतील */
-        gap: 10px !important;
-    }
-    
-    .cert-img-holder {
-        height: 120px !important; /* उभ्या सर्टिफिकेट्सची उंची कमी केली जेणेकरून स्क्रीनवर मोठे दिसणार नाहीत */
-        padding: 4px !important;
-    }
-    
-    .cert-body h3 {
-        font-size: 12px !important;
-    }
-    
-    .company-name {
-        font-size: 11px !important;
-    }
-
-    /* 6. कॉन्टॅक्ट विभाग (Contact Section) - एकाखाली एक */
-    .contact-dual-layout {
-        flex-direction: column !important; /* डावा-उजवा ऐवजी एकाखाली एक */
-        gap: 20px !important;
-        align-items: stretch !important;
-    }
-    
-    .contact-info-panel, .contact-form-panel {
-        width: 100% !important;
-        padding: 20px !important;
-    }
-
-    /* 7. फुटर (Footer) - रिस्पॉन्सिव्ह */
-    .footer-top-matrix {
-        flex-direction: column !important;
-        gap: 30px !important;
-        text-align: center !important;
-    }
-    
-    .footer-brand-box {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-    }
-    
-    .footer-brand-box p {
-        margin: 0 auto !important;
-    }
-    
-    .footer-social-row {
-        justify-content: center !important;
-    }
-    
-    .footer-links-box, .footer-tech-box {
-        align-items: center !important;
-    }
-}
-
-/* अगदी छोट्या मोबाईल स्क्रीनसाठी (उदा. iPhone SE) */
-@media (max-width: 480px) {
-    .cert-grid-matrix {
-        grid-template-columns: 1fr !important; /* खूप छोट्या स्क्रीनवर १ कॉलम */
-    }
-    .cert-img-holder {
-        height: 160px !important;
-    }
-}
-/* ==================== BOLD & CLEAR GLOBAL SECTION GAP ==================== */
-section {
-    padding-top: 110px !important;    /* आतली वरची जागा अजून वाढवली */
-    padding-bottom: 110px !important; /* आतली खालची जागा अजून वाढवली */
-    margin-bottom: 60px !important;    /* दोन सेक्शन्स मधील बाहेरील अंतर */
-    position: relative !important;
-}
-
-/* दोन सेक्शन्सच्या मध्ये एक थळक निऑन फिकट रेषा (Divider Line) */
-section::after {
-    content: "" !important;
-    position: absolute !important;
-    bottom: 0 !important;
-    left: 10% !important;
-    width: 80% !important; /* रेषा पूर्ण स्क्रीनवर न जाता मध्यभागी ८०% दिसेल */
-    height: 1px !important;
-    /* तुझ्या थीमच्या सायन आणि जांभळ्या रंगाचा थळक फिकट लूक */
-    background: linear-gradient(to right, transparent, rgba(0, 242, 254, 0.15), rgba(155, 81, 224, 0.15), transparent) !important;
-}
-
-/* शेवटचा कॉन्टॅक्ट विभाग आणि फुटरच्या मध्ये रेषा नको म्हणून */
-#contact::after {
-    display: none !important;
-}
-
-#contact {
-    margin-bottom: 0px !important;
-    padding-bottom: 80px !important;
-}
-/* ==================== EACH SECTION DIFFERENT BACKGROUND MATRICES ==================== */
-
-/* 1. HOME SECTION - एकदम डीप डार्क स्पेस लुक */
-#home {
-    background: radial-gradient(circle at 50% 50%, #040c24 0%, #020612 100%) !important;
-}
-
-/* 2. ABOUT SECTION - हलका निळा-काळा शेड (Deep Navy Blue) */
-#about {
-    background: linear-gradient(180deg, #020612 0%, #050f2b 50%, #020612 100%) !important;
-}
-
-/* 3. SKILLS SECTION - पूर्णपणे डार्क (Pure Cyber Dark) जेणेकरून निऑन बार्स चमकतील */
-#skills {
-    background: #02050e !important;
-}
-
-/* 4. PROJECTS SECTION - ग्लॉसी डार्क ग्रॅफाइट टोन (Graphite Glow) */
-#projects {
-    background: linear-gradient(135deg, #030816 0%, #071233 100%) !important;
-}
-
-/* 5. SERVICES SECTION - थोडा मखमली जांभळा-डार्क शेड (Midnight Violet Velvet) */
-#services {
-    background: radial-gradient(circle at 10% 20%, #030816 0%, #080a21 90%) !important;
-}
-
-/* 6. MY EXPERIENCE / TIMELINE - डार्क चारकोल लुक */
-.timeline-section {
-    background: #020614 !important;
-}
-
-/* 7. INTERNSHIPS & CERTIFICATES - फ्युचरिस्टिक टेक लॅब डार्क ब्लू */
-#internships {
-    background: linear-gradient(180deg, #020614 0%, #061236 50%, #030816 100%) !important;
-}
-
-/* 8. CONTACT SECTION - सर्वात कडक डीप मॅट ब्लॅक (Ultimate Matte Dark) */
-#contact {
-    background: #01040a !important;
-}
-/* ==================== ABOUT SEPARATE STATS BOXES & 3D GLOW ==================== */
-
-.about-stats-container {
-    display: grid !important;
-    grid-template-columns: repeat(4, 1fr) !important;
-    gap: 20px !important;
-    max-width: 1100px !important;
-    margin: 30px auto !important;
-    width: 100% !important;
-    perspective: 1000px; /* ३D इफेक्ट दिसण्यासाठी */
-}
-
-/* सेपरेट डब्ब्यांची प्रिमियम स्टाईल */
-.about-stat-box {
-    background: #060d22 !important;
-    border: 1px solid rgba(255, 255, 255, 0.03) !important;
-    border-radius: 12px !important;
-    padding: 24px 15px !important;
-    text-align: center !important;
-    transform-style: preserve-3d;
-    /* कर्सर फिरवताना हालचाल स्मूथ होण्यासाठी */
-    transition: transform 0.1s ease, border-color 0.3s ease, box-shadow 0.3s ease !important;
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2) !important;
-}
-
-/* माऊस गेल्यावर निऑन सायन ग्लो आणि बॉर्डर */
-.about-stat-box:hover {
-    border-color: rgba(0, 242, 254, 0.3) !important;
-    box-shadow: 0 12px 30px rgba(0, 242, 254, 0.12) !important;
-}
-
-.stat-number {
-    font-size: 28px !important;
-    font-weight: 700 !important;
-    color: #ffffff !important;
-    margin-bottom: 6px !important;
-    font-family: 'Poppins', sans-serif !important;
-}
-
-.stat-label {
-    font-size: 12.5px !important;
-    color: #8f9cae !important;
-    margin: 0 !important;
-    font-weight: 400 !important;
-    letter-spacing: 0.3px;
-}
-
-/* मोबाईल आणि टॅब्लेटवर रिस्पॉन्सिव्ह फिटिंग */
-@media (max-width: 992px) {
-    .about-stats-container {
-        grid-template-columns: repeat(2, 1fr) !important; /* २-२ डब्बे दिसतील */
-        gap: 15px !important;
-    }
-}
-
-@media (max-width: 480px) {
-    .about-stats-container {
-        grid-template-columns: 1fr !important; /* छोट्या मोबाईलवर एकाखाली एक १ डब्बा */
-    }
-}
-/* ==================== SMOOTH REVEAL ANIMATION ENGINE ==================== */
-
-/* सुरवातीला होम पेजचे घटक लपवून ठेवण्यासाठी आणि ॲनिमेशन जोडण्यासाठी */
-.home-content, .hero-img-box, .navbar {
-    opacity: 0;
-    transform: translateY(25px); /* २५px खालून वर येईल */
-    transition: opacity 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94), 
-                transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) !important;
-}
-
-/* जेव्हा प्रीलोडर संपेल तेव्हा हा क्लास ऍक्टिव्हेट होईल */
-.reveal-active .home-content,
-.reveal-active .hero-img-box,
-.reveal-active .navbar {
-    opacity: 1 !important;
-    transform: translateY(0) !important;
-}
-
-/* घटकांमध्ये हलकासा वेळेचा फरक (Stagger Delay) जेणेकरून एकापाठोपाठ एक उघडतील */
-.reveal-active .navbar { transition-delay: 0.1s !important; }
-.reveal-active .home-content { transition-delay: 0.3s !important; }
-.reveal-active .hero-img-box { transition-delay: 0.5s !important; }
-/* ==================== INSTANT WOW FACTOR BACKGROUND & EFFECT ==================== */
-
-.hero-section {
-    position: relative !important;
-    overflow: hidden !important;
-    background: #020612 !important;
-}
-
-/* हवेत तरंगणारे सायबर कल्स डब्बा */
-#cyber-particles {
-    position: absolute !important;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 1;
-    pointer-events: none; /* माऊस क्लिकला अडथळा येणार नाही */
-}
-
-/* प्रीलोडर संपल्यावर सर्व घटक अत्यंत प्रीमियम स्टाईलने स्क्रीनवर येण्यासाठी */
-.reveal-element {
-    opacity: 0;
-    transform: translateY(30px);
-    animation: smoothPopUp 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
-}
-
-/* एकापाठोपाठ एक घटक येण्यासाठी टाईम डिले */
-.delay-1 { animation-delay: 0.3s; }
-.delay-2 { animation-delay: 0.5s; }
-.delay-3 { animation-delay: 0.7s; }
-
-@keyframes smoothPopUp {
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-/* निऑन सायन मजकूर जो डोळ्यात भरेल */
-.hero-section h1 span {
-    color: #00f2fe !important;
-    text-shadow: 0 0 15px rgba(0, 242, 254, 0.6) !important;
-}
-/* ==================== CINEMATIC PRELOADER GLOW ENGINE ==================== */
 
 #custom-cyber-preloader {
     position: fixed !important;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    background: #020612 !important; /* डीप डार्क बॅकग्राउंड */
-    z-index: 999999 !important; /* हा डब्बा सगळ्यात वर राहील */
+    top: 0; left: 0; width: 100vw; height: 100vh;
+    background: #020612 !important;
+    z-index: 999999 !important;
     display: flex !important;
     align-items: center !important;
     justify-content: center !important;
     overflow: hidden;
     transition: opacity 0.6s ease-in-out, visibility 0.6s ease-in-out !important;
 }
+.preloader-bg-effect { position: absolute; width: 100%; height: 100%; background-image: linear-gradient(rgba(0, 242, 254, 0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(0, 242, 254, 0.03) 1px, transparent 1px); background-size: 30px 30px; background-position: center; animation: pulseBg 4s infinite alternate; }
+.preloader-content-box { position: relative; z-index: 2; width: 90%; max-width: 400px; text-align: center; }
+.preloader-logo { font-family: 'Fira Code', monospace !important; font-size: 32px !important; font-weight: 700 !important; color: #9b51e0 !important; text-shadow: 0 0 20px rgba(155, 81, 224, 0.6) !important; margin-bottom: 35px !important; animation: logoGlow 1.5s ease-in-out infinite alternate; }
+.preloader-logo span { color: #00f2fe !important; text-shadow: 0 0 20px rgba(0, 242, 254, 0.6) !important; font-family: 'Poppins', sans-serif !important; }
+.loader-status-row { display: flex; justify-content: space-between; margin-bottom: 8px; font-family: 'Fira Code', monospace; }
+.status-percentage { font-size: 12px !important; color: #00f2fe !important; font-weight: 600; }
+.neon-progress-track { width: 100%; height: 4px; background: rgba(255, 255, 255, 0.03); border-radius: 10px; overflow: hidden; border: 1px solid rgba(255, 255, 255, 0.05); }
+.neon-progress-bar { height: 100%; width: 0%; background: linear-gradient(90deg, #9b51e0, #00f2fe) !important; box-shadow: 0 0 12px #00f2fe, 0 0 4px #9b51e0 !important; border-radius: 10px; transition: width 0.08s ease-out; }
 
-/* बॅकग्राउंडला फिकट सायबर ग्रीड इफेक्ट (Tech Matrix Lines) */
-.preloader-bg-effect {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    background-image: linear-gradient(rgba(0, 242, 254, 0.03) 1px, transparent 1px),
-                      linear-gradient(90deg, rgba(0, 242, 254, 0.03) 1px, transparent 1px);
-    background-size: 30px 30px;
-    background-position: center;
-    animation: pulseBg 4s infinite alternate;
+@keyframes logoGlow { from { transform: scale(0.98); opacity: 0.9; } to { transform: scale(1.02); opacity: 1; } }
+@keyframes pulseBg { from { opacity: 0.5; } to { opacity: 1; } }
+.preloader-hidden { opacity: 0 !important; visibility: hidden !important; pointer-events: none; }
+
+/* ==================== 15. PURE ULTRA-RESPONSIVE ENGINE ==================== */
+@media (max-width: 992px) {
+    .hero-section { flex-direction: column-reverse !important; text-align: center !important; padding-top: 140px !important; gap: 50px !important; }
+    .hero-left, .hero-right { max-width: 100% !important; width: 100% !important; }
+    .hero-cta-group, .social-icons-row { justify-content: center !important; }
+    .image-avatar-frame { width: 280px !important; height: 280px !important; }
+    .orbit-item { animation: none !important; position: relative !important; transform: none !important; display: inline-flex !important; margin: 4px !important; }
+    .stats-grid-matrix, .cert-grid-matrix, .services-grid-matrix { grid-template-columns: repeat(2, 1fr) !important; }
+    .contact-dual-layout, .footer-top-matrix { flex-direction: column !important; gap: 25px !important; }
+    .hero-cta-group { flex-wrap: wrap !important; justify-content: center !important; gap: 12px !important; }
 }
 
-.preloader-content-box {
-    position: relative;
-    z-index: 2;
-    width: 90%;
-    max-width: 400px;
-    text-align: center;
-}
-
-/* लोगोचा खतरनाक निऑन लुक */
-.preloader-logo {
-    font-family: 'Fira Code', monospace !important;
-    font-size: 32px !important;
-    font-weight: 700 !important;
-    color: #9b51e0 !important; /* जांभळा */
-    text-shadow: 0 0 20px rgba(155, 81, 224, 0.6) !important;
-    margin-bottom: 35px !important;
-    animation: logoGlow 1.5s ease-in-out infinite alternate;
-}
-
-.preloader-logo span {
-    color: #00f2fe !important; /* सायन */
-    text-shadow: 0 0 20px rgba(0, 242, 254, 0.6) !important;
-    font-family: 'Poppins', sans-serif !important;
-}
-
-/* स्टेटस रो (टेक्स्ट + टक्केवारी) */
-.loader-status-row {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 8px;
-    font-family: 'Fira Code', monospace;
-}
-
-.status-text {
-    font-size: 11px !important;
-    color: #8f9cae !important;
-    letter-spacing: 1px;
-}
-
-.status-percentage {
-    font-size: 12px !important;
-    color: #00f2fe !important;
-    font-weight: 600;
-}
-
-/* निऑन प्रोग्रेस बार ट्रॅक */
-.neon-progress-track {
-    width: 100%;
-    height: 4px;
-    background: rgba(255, 255, 255, 0.03);
-    border-radius: 10px;
-    overflow: hidden;
-    border: 1px solid rgba(255, 255, 255, 0.05);
-}
-
-/* प्रत्यक्ष लोड होणारी चमकदार पट्टी */
-.neon-progress-bar {
-    height: 100%;
-    width: 0%; /* JS द्वारे कंट्रोल होईल */
-    background: linear-gradient(90deg, #9b51e0, #00f2fe) !important;
-    box-shadow: 0 0 12px #00f2fe, 0 0 4px #9b51e0 !important;
-    border-radius: 10px;
-    transition: width 0.08s ease-out;
-}
-
-/* ॲनिमेशन्स */
-@keyframes logoGlow {
-    from { transform: scale(0.98); opacity: 0.9; }
-    to { transform: scale(1.02); opacity: 1; }
-}
-
-@keyframes pulseBg {
-    from { opacity: 0.5; }
-    to { opacity: 1; }
-}
-
-/* प्रीलोडर संपल्यावर गायब करण्याचा क्लास */
-.preloader-hidden {
-    opacity: 0 !important;
-    visibility: hidden !important;
-    pointer-events: none;
-}
-/* मोबाईल स्क्रीनसाठी नवबार सेट करणे */
 @media (max-width: 768px) {
-    .navbar {
-        display: flex;
-        flex-wrap: wrap;       /* शब्द खाली सरकले तरी जागा मॅनेज होईल */
-        justify-content: center;
-        gap: 15px;            /* शब्दांमधील अंतर (Distance) परफेक्ट ठेवण्यासाठी */
-    }
+    section { padding: 40px 4% 30px 4% !important; }
+    .section-main-title { font-size: 26px !important; margin-bottom: 5px !important; }
+    .section-subtitle { font-size: 12px !important; margin-bottom: 25px !important; }
+    .advanced-projects-matrix, .services-grid-matrix { grid-template-columns: 1fr !important; }
+    
+    /* Timeline Mobile Fix */
+    .timeline-line { left: 15px !important; }
+    .timeline-icon-dot { left: 15px !important; transform: translateX(-50%) !important; top: 15px !important; width: 30px !important; height: 30px !important; font-size: 11px !important; }
+    .left-item, .right-item { padding-left: 40px !important; padding-right: 0 !important; justify-content: flex-start !important; }
+    .timeline-card { width: 100% !important; padding: 14px !important; }
+    
+    .cert-grid-matrix { grid-template-columns: repeat(2, 1fr) !important; gap: 10px !important; }
+    .cert-img-holder { height: 120px !important; padding: 4px !important; }
+    .contact-info-panel, .contact-form-panel { width: 100% !important; padding: 20px !important; }
+    .footer-top-matrix { text-align: center !important; }
+    .footer-brand-box, .footer-links-box, .footer-tech-box { align-items: center !important; }
+    .footer-social-row { justify-content: center !important; }
+    
+    /* Skills horizontal flow tablet split reset */
+    .skills-box-grid, .skills-grid { flex-wrap: wrap !important; flex-direction: row !important; }
+    .skill-icon-card, .skill-icon-card-full { flex: 1 1 calc(50% - 10px) !important; }
+    
+    .navbar { display: flex !important; flex-wrap: wrap !important; justify-content: center !important; gap: 15px !important; }
+    .navbar a { padding: 5px 8px !important; font-size: 14px !important; }
+}
 
-    .navbar a {
-        padding: 5px 8px;     /* मोबाईलवर शब्दांच्या भोवतीची एक्स्ट्रा जागा कमी करण्यासाठी */
-        font-size: 14px;      /* फॉन्ट थोडा लहान केला की एका लाईनमध्ये बसेल */
-    }
+@media (max-width: 480px) {
+    .cert-grid-matrix { grid-template-columns: 1fr !important; }
+    .cert-img-holder { height: 160px !important; }
+    .about-stats-container { grid-template-columns: 1fr !important; }
 }
