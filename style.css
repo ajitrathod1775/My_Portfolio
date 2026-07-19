@@ -790,3 +790,60 @@ section::after { content: "" !important; position: absolute !important; bottom: 
     .cert-img-holder { height: 160px !important; }
     .about-stats-container { grid-template-columns: 1fr !important; }
 }
+/* ===================================================
+   AJIT BHAI - STRICT HERO SYMMETRY LOCK
+   =================================================== */
+#home.hero-section {
+    min-height: 100vh !important;
+    display: flex !important;
+    flex-direction: row !important; /* Force layout side-by-side */
+    align-items: center !important;
+    justify-content: space-between !important;
+    padding: 140px 6% 80px 6% !important; /* Navbar cha overlay gap safe karel */
+    box-sizing: border-box !important;
+    gap: 40px !important;
+}
+
+.hero-left {
+    flex: 1.2 !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    text-align: left !important;
+    z-index: 10 !important;
+}
+
+.hero-right {
+    flex: 0.8 !important;
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    z-index: 5 !important;
+}
+
+/* Photo ring center alignment control */
+.image-avatar-frame {
+    position: relative !important;
+    width: 340px !important;
+    height: 340px !important;
+}
+
+.photo-holder {
+    position: absolute !important;
+    top: 50% !important;
+    left: 50% !important;
+    transform: translate(-50%, -50%) !important;
+    width: 76% !important;
+    height: 76% !important;
+    border-radius: 50% !important;
+    overflow: hidden !important;
+    background-color: #060d22 !important; /* J पर्यंत फोटो लोड नाही होत तो पर्यंत डार्क बॅकग्राउंड */
+    z-index: 6 !important;
+}
+
+.photo-holder img {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    display: block !important;
+}
