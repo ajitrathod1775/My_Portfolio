@@ -2361,3 +2361,17 @@ section::after {
     visibility: hidden !important;
     pointer-events: none;
 }
+/* मोबाईल स्क्रीनसाठी नवबार सेट करणे */
+@media (max-width: 768px) {
+    .navbar {
+        display: flex;
+        flex-wrap: wrap;       /* शब्द खाली सरकले तरी जागा मॅनेज होईल */
+        justify-content: center;
+        gap: 15px;            /* शब्दांमधील अंतर (Distance) परफेक्ट ठेवण्यासाठी */
+    }
+
+    .navbar a {
+        padding: 5px 8px;     /* मोबाईलवर शब्दांच्या भोवतीची एक्स्ट्रा जागा कमी करण्यासाठी */
+        font-size: 14px;      /* फॉन्ट थोडा लहान केला की एका लाईनमध्ये बसेल */
+    }
+}
