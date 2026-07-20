@@ -40,46 +40,22 @@ body {
 /* ==================== 01. FIXED NAVBAR CENTER SYSTEM ==================== */
 header {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-between; /* हे सर्वात महत्त्वाचे आहे: हे दोघांमध्ये अंतर निर्माण करेल */
     align-items: center;
-    padding: 15px 6%;
-    position: fixed;
-    width: 100%;
-    top: 0;
-    left: 0;
-    z-index: 100;
-    background: rgba(3, 8, 22, 0.85);
-    backdrop-filter: blur(10px);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+    padding: 20px 5%; /* वर-खाली २०px आणि आजूबाजूला ५% जागा सोडेल */
 }
 
-.brand-logo { 
-    font-size: 20px; 
-    font-weight: 700; 
-    color: var(--text-primary); 
-    font-family: 'Fira Code', monospace; 
+.brand-logo {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #00d4ff; /* जो रंग तू वापरला आहेस */
 }
 
-.brand-logo span { color: var(--neon-cyan); }
-
-/* Links Container Centering Logic */
-.nav-links {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 30px; 
-    margin: 0 auto; /* Ya mule purn text screen chya center la shift hoto */
-    list-style: none;
-    padding: 0;
-}
-
-.nav-links a { 
-    color: var(--text-gray); 
-    text-decoration: none; 
-    font-size: 14px; 
-    font-weight: 500; 
-    transition: 0.3s; 
-    position: relative; 
+.nav-links a {
+    margin-left: 25px; /* प्रत्येक लिंकच्या डाव्या बाजूला २५px जागा सोडेल */
+    text-decoration: none;
+    color: #fff;
+    font-size: 1rem;
 }
 
 .nav-links a:hover, .nav-links a.active { 
@@ -879,4 +855,41 @@ section::after { content: "" !important; position: absolute !important; bottom: 
     display: flex !important;
     align-items: center !important;
     gap: 8px !important;
+}
+/* -- हे नेव्हबार नीट करण्यासाठी -- */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 5%;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+    background: rgba(6, 13, 34, 0.9);
+}
+
+/* -- हे टॅग्स फोटोच्या समोर येऊ नये म्हणून -- */
+.orbit-item {
+    z-index: 10;
+}
+
+/* -- मोबाईल स्क्रीनसाठी -- */
+@media (max-width: 768px) {
+    header {
+        padding: 10px 2%;
+    }
+    .orbit-item {
+        font-size: 10px;
+        padding: 4px 8px;
+    }
+}
+@media (max-width: 768px) {
+    .orbit-item {
+        font-size: 10px; /* मोबाईलवर टॅग्स छोटे दिसतील */
+        padding: 4px 8px;
+    }
+    .image-avatar-frame {
+        transform: scale(0.8); /* मोबाईलवर फोटो थोडा लहान दिसेल */
+    }
 }
