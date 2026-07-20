@@ -847,3 +847,36 @@ section::after { content: "" !important; position: absolute !important; bottom: 
     object-fit: cover !important;
     display: block !important;
 }
+/* १. फोटो आणि रिंगला एक स्थिर जागा (Parent Container) */
+.image-avatar-frame {
+    position: relative !important;
+    width: 350px !important;
+    height: 350px !important;
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    margin: 0 auto !important;
+}
+
+/* २. फोटोला रिंगच्या आत परफेक्ट सेंटरला लॉक कर */
+.photo-holder {
+    position: absolute !important;
+    width: 250px !important;
+    height: 250px !important;
+    border-radius: 50% !important;
+    overflow: hidden !important;
+    z-index: 2 !important; /* हे फोटोला टॅगच्या मागे ठेवेल */
+    border: 3px solid #00f2ff !important;
+}
+
+/* ३. टॅग्जसाठी 'z-index' वाढव (जेणेकरून ते फोटोच्या वर दिसतील) */
+.orbit-item {
+    position: absolute !important;
+    z-index: 10 !important; /* टॅग्ज नेहमी फोटोच्या वर राहतील */
+    background: #060d22 !important;
+    padding: 5px 12px !important;
+    border-radius: 20px !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 8px !important;
+}
