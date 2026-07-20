@@ -893,3 +893,23 @@ header {
         transform: scale(0.8); /* मोबाईलवर फोटो थोडा लहान दिसेल */
     }
 }
+header {
+    /* border-bottom: 2px solid #00d4ff;  <-- ही ओळ काढून टाक किंवा अशी कमेंट कर */
+    border-bottom: none; 
+}
+.nav-links a {
+    position: relative;
+    padding-bottom: 5px;
+}
+
+/* जेव्हा तू त्या लिंकवर असशील */
+.nav-links a:hover, .nav-links a.active {
+    border-bottom: 2px solid #00d4ff;
+}
+.brand-logo {
+    background: linear-gradient(90deg, #00d4ff, #8a2be2); /* निळा आणि जांभळा ग्रेडियंट */
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-weight: 800;
+    font-size: 1.8rem;
+}
